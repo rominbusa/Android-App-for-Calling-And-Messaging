@@ -24,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
     public void getcontact(View view) {
         Intent intentContact=new Intent(MainActivity.this,ContactActivity.class);
         startActivity(intentContact);
+    }
 
+    public  void setTimer(View view)
+    {
+        Intent intent = new Intent(this,TimerActivity.class);
+        startActivity(intent);
     }
 }

@@ -18,6 +18,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ContactActivity"></activity>
+		<activity android:name=".TimerActivity"></activity>
+
+        <receiver android:name=".MyReceiver"></receiver>
     </application>
 
 </manifest>
