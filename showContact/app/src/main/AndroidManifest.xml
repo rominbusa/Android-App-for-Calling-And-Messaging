@@ -19,7 +19,8 @@
         </activity>
         <activity android:name=".ContactActivity"></activity>
 		<activity android:name=".TimerActivity"></activity>
-
+        <activity android:name=".NotificationReceiver"></activity>
+        <receiver android:name=".clearNotification"></receiver>
         <receiver android:name=".MyReceiver"></receiver>
     </application>
 
