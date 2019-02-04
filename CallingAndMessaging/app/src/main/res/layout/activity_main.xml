@@ -16,7 +16,9 @@
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="100dp"
-        android:text="Call By Voice" />
+        android:text="Call By Voice"
+        android:onClick="getVoice"
+        tools:ignore="OnClick" />
 
     <Button
         android:id="@+id/button2"
