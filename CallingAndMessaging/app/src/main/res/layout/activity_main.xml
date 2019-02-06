@@ -30,7 +30,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="248dp"
-        android:onClick="showContactList"
+        android:onClick="setTimer"
         android:text="Call By Timer" />
 
 </RelativeLayout>

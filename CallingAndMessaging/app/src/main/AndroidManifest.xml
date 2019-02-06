@@ -17,6 +17,7 @@
         <activity android:name=".ContactListActivity" />
         <activity android:name=".TimerActivity" />
         <activity android:name=".AudioRecorder"></activity>
+        <activity android:name=".NotificationReceiver"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".MyReceiver"></receiver>
+        <receiver android:name=".ClearNotification"></receiver>
     </application>
 
 </manifest>
