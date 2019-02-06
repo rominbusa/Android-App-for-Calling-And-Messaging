@@ -23,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void showContactList(View view) {
-        Intent intent=new Intent(MainActivity.this,ContactListActivity.class);
+    public void setTimer(View view) {
+        Intent intent=new Intent(MainActivity.this,TimerActivity.class);
        // intent.putExtra("Contact_name",personname);
 //        intent.putExtra("Contact_numbers",contactnumbers);
-//        startActivity(intent);
+        startActivity(intent);
     }
 
     public void getVoice(View view) {
