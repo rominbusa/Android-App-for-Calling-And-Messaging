@@ -23,10 +23,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void setTimer(View view) {
-        Intent intent=new Intent(MainActivity.this,TimerActivity.class);
+    public void setTimerByCall(View view) {
+//        Intent intent=new Intent(MainActivity.this,TimerActivity.class);
        // intent.putExtra("Contact_name",personname);
 //        intent.putExtra("Contact_numbers",contactnumbers);
+        Intent intent= new Intent(MainActivity.this,DisplayContactListActivity.class);
+        intent.putExtra("option","Call");
+        startActivity(intent);
+    }
+
+    public void setTimerByMessage(View view) {
+//        Intent intent=new Intent(MainActivity.this,TimerActivity.class);
+        // intent.putExtra("Contact_name",personname);
+//        intent.putExtra("Contact_numbers",contactnumbers);
+        Intent intent= new Intent(MainActivity.this,DisplayContactListActivity.class);
+        intent.putExtra("option","Message");
         startActivity(intent);
     }
 

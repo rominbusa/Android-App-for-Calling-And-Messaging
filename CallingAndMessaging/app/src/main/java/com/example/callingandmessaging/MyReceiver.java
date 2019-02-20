@@ -17,10 +17,13 @@ public class MyReceiver extends BroadcastReceiver {
         Log.d("works","success it works\n");
         Toast.makeText(context,"ALARM",Toast.LENGTH_LONG).show();
 
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 
         Intent intent1=new Intent(context,NotificationReceiver.class);
+        intent1.putExtra("Selected_name",intent.getStringExtra("Selected_name"));
         PendingIntent pendingIntent = PendingIntent.getActivity(context,0,intent1,PendingIntent.FLAG_UPDATE_CURRENT);
+        Log.d("inmyreceiver",intent.getStringExtra("Selected_name"));
 
         Intent clearIntent = new Intent(context,ClearNotification.class);
         int notification_id = (int)System.currentTimeMillis()%20000;

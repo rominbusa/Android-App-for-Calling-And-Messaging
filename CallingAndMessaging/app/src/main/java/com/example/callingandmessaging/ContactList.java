@@ -8,12 +8,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import android.os.Handler;
 
 public class ContactList extends Application implements Runnable {
 
     private ArrayList<Person> personList = new ArrayList<Person>();
-    private Person person = new Person();
+
     private Handler mainHandler = new Handler();
 
     //get and set for person array
@@ -30,7 +32,7 @@ public class ContactList extends Application implements Runnable {
         @Override
         public void run (){
 
-            String contact_number[] = new String[10];
+
             ContentResolver contentResolver=getContentResolver();
             int j,q=0;
 
@@ -47,6 +49,8 @@ public class ContactList extends Application implements Runnable {
             if(cursor!=null && cursor.getCount()>0){
 
                 while(cursor.moveToNext()) {
+                    Person person = new Person();
+                    String contact_number[] = new String[10];
                     j = 0;
                     String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
 
@@ -91,8 +95,9 @@ public class ContactList extends Application implements Runnable {
 
                     person.setContact_no(contact_number);
                     if (q != 0) {
+//                        Log.d("adsasdadasdad",person.getName());
                         personList.add(person);
-                        Log.d("name", person.getName());
+//                        Log.d("name", person.getName());
                     }
                 }
                 mainHandler.post(new Runnable() {
@@ -111,5 +116,18 @@ public class ContactList extends Application implements Runnable {
                     }
                 });
             }
+
+//            Iterator itr = personList.iterator();
+//            Person person=null;
+//            try{
+//            Log.d("size ",String.valueOf(personList.size()));
+//            while(itr.hasNext()){
+//                person =(Person)itr.next();
+//                Log.d("trying to get ame",person.getName());
+//
+//
+//            }}catch (NullPointerException e){
+//
+//            }
         }
 }

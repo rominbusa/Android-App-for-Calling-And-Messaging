@@ -16,8 +16,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ContactListActivity" />
         <activity android:name=".TimerActivity" />
+        <activity android:name=".MessageActivity"></activity>
         <activity android:name=".AudioRecorder"></activity>
         <activity android:name=".NotificationReceiver"></activity>
+        <activity android:name=".CallActivity"></activity>
+        <activity android:name=".DisplayContactListActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -46,10 +46,17 @@ public class AudioRecorder extends Activity {
                     text_of_audio=result.get(0);
 
                     audioStr=URLBuilder.buildUrl(text_of_audio);
-
+                    if(audioStr.contains("call")){
+                        audioStr = audioStr.substring(4);
+                        Log.d("name",audioStr);
+                        Intent intent = new Intent(this,CallActivity.class);
+                        intent.putExtra("name",audioStr);
+                        startActivity(intent);
+                    }
                     Log.d("audio",audioStr);
                 }
                 break;
         }
+
     }
 }

@@ -1,5 +1,7 @@
 package com.example.callingandmessaging;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -21,6 +23,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class BuildURL {
 
     URL url = null;
+
     String callto,whattodo,name,audioStr;
 
     //build url to send request to wit api

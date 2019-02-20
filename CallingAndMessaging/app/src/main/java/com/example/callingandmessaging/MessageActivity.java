@@ -3,23 +3,25 @@ package com.example.callingandmessaging;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SearchRecentSuggestionsProvider;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class NotificationReceiver extends Activity {
-
+public class MessageActivity extends Activity {
     String number;
+    String msg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("yeah","yeah it works..");
-       // Toast.makeText(NotificationReceiver.this,"NotificationReceiverActivity",Toast.LENGTH_SHORT);
+        setContentView(R.layout.activity_message_timer);
+        Log.d("messageText",getIntent().getStringExtra("messageText"));
         searchContact();
     }
 
@@ -28,6 +30,7 @@ public class NotificationReceiver extends Activity {
 
 //        String name= b.getString("Selected_name"); //getIntent().getStringExtra("name");
         String name=getIntent().getStringExtra("Selected_name");
+        msg=getIntent().getStringExtra("messageText");
         if(name==null){
             return;
         }
@@ -45,18 +48,15 @@ public class NotificationReceiver extends Activity {
             }
         }
 
-        makecall();
+        SendMessage();
     }
 
-    protected void makecall(){
-        if(number!=null) {
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse("tel:" + number));
-            if (ActivityCompat.checkSelfPermission(NotificationReceiver.this,
-                    Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                return;
-            }
-            startActivity(callIntent);
+    protected void SendMessage(){
+        if(number!=null && msg!=null) {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(number,null,msg,null,null);
         }
     }
+
+
 }

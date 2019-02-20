@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -24,8 +25,12 @@ public class TimerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timer);
-        //Bundle b = getIntent().getExtras();
+        if(getIntent().getStringExtra("option").equals("Call")) {
+            setContentView(R.layout.activity_timer);
+        }
+        else {
+            setContentView(R.layout.activity_message_timer);
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -45,12 +50,32 @@ public class TimerActivity extends AppCompatActivity {
         calendar.set(Calendar.MINUTE,startMinute);
         calendar.set(Calendar.HOUR_OF_DAY,startHour);
 
+
+
+
         alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
-        Intent intent=new Intent(this,MyReceiver.class);
-        int m=(int)System.currentTimeMillis()%50000;
-        pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(),m,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        if(getIntent().getStringExtra("option").equals("Call")) {
+            Intent intent = new Intent(this, MyReceiver.class);
+            Log.d("slected-name", getIntent().getStringExtra("Selected_name"));
+            intent.putExtra("Selected_name", getIntent().getStringExtra("Selected_name"));
+            int m = (int) System.currentTimeMillis() % 50000;
+            pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), m, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingIntent);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        }
+        //for message
+        else {
+            EditText messageEditText = findViewById(R.id.editText);
+            String messageText = messageEditText.getText().toString();
+            Log.d("msg",messageText);
+
+            Intent intent = new Intent(this,MessageActivity.class);
+            intent.putExtra("Selected_name", getIntent().getStringExtra("Selected_name"));
+            intent.putExtra("messageText",messageText);
+            int m = (int) System.currentTimeMillis() % 50000;
+            pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), m, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        }
     }
 }
