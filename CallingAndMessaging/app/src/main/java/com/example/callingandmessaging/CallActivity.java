@@ -21,7 +21,7 @@ public class CallActivity extends Activity {
         ArrayList<Person> contact = contactList.getPerson();
 
         Iterator itr = contact.iterator();
-        Person person=null;
+        Person person = null;
         try {
             while (itr.hasNext()) {
                 person = (Person) itr.next();
@@ -35,11 +35,11 @@ public class CallActivity extends Activity {
 
             Log.d("calling to ", person.getName());
         }catch (NullPointerException e){
-
+            // T
         }
-        String arr[]=person.getContact_no();
+        String arr[] = person.getContact_no();
 
-        if(arr[0]!=null) {
+        if(arr[0] != null) {
             Intent callIntent = new Intent(Intent.ACTION_CALL);
             callIntent.setData(Uri.parse("tel:" + arr[0]));
 //            stringBuilderQuryResult.append(contactnumbers[0][0]);
