@@ -20,7 +20,7 @@ public class MessageActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message_timer);
+        setContentView(R.layout.activity_timer);
         Log.d("messageText",getIntent().getStringExtra("messageText"));
         searchContact();
     }

@@ -68,14 +68,14 @@ public class TimerActivity extends AppCompatActivity {
         else {
             EditText messageEditText = findViewById(R.id.editText);
             String messageText = messageEditText.getText().toString();
-            Log.d("msg",messageText);
 
-            Intent intent = new Intent(this,MessageActivity.class);
-            intent.putExtra("Selected_name", getIntent().getStringExtra("Selected_name"));
-            intent.putExtra("messageText",messageText);
+            Intent intent1 = new Intent(this,MessageActivity.class);
+            intent1.putExtra("Selected_name", getIntent().getStringExtra("Selected_name"));
+            intent1.putExtra("messageText",messageText);
             int m = (int) System.currentTimeMillis() % 50000;
-            pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), m, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            pendingIntent = PendingIntent.getActivity(this.getApplicationContext(), m, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+            Log.d("msg",messageText);
         }
     }
 }
