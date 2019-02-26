@@ -24,7 +24,7 @@ public class BuildURL {
 
     URL url = null;
 
-    String callto,whattodo,name,audioStr;
+    String whattodo,name,audioStr;
 
     //build url to send request to wit api
     public String buildUrl(String text_of_audio) {
@@ -41,8 +41,6 @@ public class BuildURL {
         }
 
         Log.d("url",url.toString());
-      //  TextView showurl = (TextView) findViewById(R.id.showUrl);
-       // showurl.setText(url.toString());
 
         try {
             audioStr = new WitQueryTask().execute(url).get();
@@ -54,9 +52,6 @@ public class BuildURL {
 
         return audioStr;
 
-        //TextView showName = (TextView) findViewById(R.id.showName);
-        //showName.setText(callto);
-
     }
 
     public class WitQueryTask extends AsyncTask<URL,Void,String> {
@@ -66,17 +61,14 @@ public class BuildURL {
             URL searchUrl = urls[0];
             String witSerachResult = null;
             try{
-                witSerachResult=getResponseFromHttpUrl(searchUrl);
+                witSerachResult = getResponseFromHttpUrl(searchUrl);
             }catch (IOException e){
                 e.printStackTrace();
             }
 
-            String s= witSerachResult;
-          //  TextView showurl=(TextView) findViewById(R.id.showUrl);
+            String s = witSerachResult;
 
-
-            JSONArray t = null;
-            if(s!=null && !s.equals("")){
+            if(s != null && !s.equals("")){
                 try {
                     JSONObject contact = new JSONObject(s);
                     JSONObject entity = contact.getJSONObject("entities");
@@ -105,10 +97,9 @@ public class BuildURL {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            //    showurl.setText(whattodo+" "+name);
             }
 
-            return whattodo+name;
+            return whattodo + name;
         }
     }
 

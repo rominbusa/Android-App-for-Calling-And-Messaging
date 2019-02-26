@@ -18,7 +18,6 @@ import java.util.Calendar;
 
 public class TimerActivity extends AppCompatActivity {
 
-    StringBuilder sb=new StringBuilder();
     AlarmManager alarmManager;
     PendingIntent pendingIntent;
 
@@ -38,10 +37,10 @@ public class TimerActivity extends AppCompatActivity {
     public void settimer(View view) {
 
         //get time from time picker
-        TimePicker tp=(TimePicker)findViewById(R.id.timePicker1);
+        TimePicker tp = (TimePicker)findViewById(R.id.timePicker1);
         //tp.setIs24HourView(true);
         int startHour = tp.getHour();
-        int startMinute=tp.getMinute();
+        int startMinute = tp.getMinute();
         Log.d("Time is:",startHour+" "+startMinute);
 
         Calendar calendar = Calendar.getInstance();
@@ -53,7 +52,7 @@ public class TimerActivity extends AppCompatActivity {
 
 
 
-        alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
         if(getIntent().getStringExtra("option").equals("Call")) {
             Intent intent = new Intent(this, MyReceiver.class);

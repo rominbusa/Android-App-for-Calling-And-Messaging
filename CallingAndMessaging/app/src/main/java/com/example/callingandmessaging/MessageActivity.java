@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class MessageActivity extends Activity {
     String number;
-    private int SEND_MESSAGE_CODE=1;
+    private int SEND_MESSAGE_CODE = 1;
     String msg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,23 +32,18 @@ public class MessageActivity extends Activity {
     }
 
     protected void searchContact(){
-        Bundle b = getIntent().getExtras();
-
-//        String name= b.getString("Selected_name"); //getIntent().getStringExtra("name");
-        String name=getIntent().getStringExtra("Selected_name");
-        msg=getIntent().getStringExtra("messageText");
-        if(name==null){
+        String name = getIntent().getStringExtra("Selected_name");
+        msg = getIntent().getStringExtra("messageText");
+        if(name == null){
             return;
         }
-        Log.d("dasjahgsd","sdadadada");
-
         ContactList contactList = (ContactList)getApplicationContext();
         ArrayList<Person> personArr = contactList.getPerson();
 
         Log.d("name is ",name);
-        for(int i=0;i<personArr.size();i++){
-            if(name.toLowerCase().equals((String) personArr.get(i).getName().toLowerCase())){
-                number=(String)personArr.get(i).getContact_no()[0];
+        for(int i = 0;i<personArr.size();i++){
+            if(name.toLowerCase().contains(personArr.get(i).getName().toLowerCase())){
+                number = personArr.get(i).getContact_no()[0];
                 Log.d("your selected name is",number);
                 break;
             }
@@ -63,7 +58,7 @@ public class MessageActivity extends Activity {
     }
 
     protected void SendMessage(){
-        if(number!=null && msg!=null) {
+        if(number != null && msg != null) {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(number,null,msg,null,null);
         }
@@ -94,7 +89,7 @@ public class MessageActivity extends Activity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if(requestCode == SEND_MESSAGE_CODE){
-            if(grantResults.length>0  && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            if(grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 SendMessage();
             }else{
                 Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();

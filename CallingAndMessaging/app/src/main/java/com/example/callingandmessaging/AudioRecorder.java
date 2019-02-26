@@ -52,11 +52,11 @@ public class AudioRecorder extends Activity {
         switch(requestCode){
             case 10:
 
-                if(resultCode==RESULT_OK && data!=null ){
-                    ArrayList<String> result=data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    text_of_audio=result.get(0);
+                if(resultCode == RESULT_OK && data != null ){
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    text_of_audio = result.get(0);
 
-                    audioStr=URLBuilder.buildUrl(text_of_audio);
+                    audioStr = URLBuilder.buildUrl(text_of_audio);
                     if(audioStr.contains("call")){
                         audioStr = audioStr.substring(4);
                         Log.d("name",audioStr);
@@ -67,7 +67,7 @@ public class AudioRecorder extends Activity {
                     else if(audioStr.contains("message")) {
                         audioStr = audioStr.substring(7);
                         Log.d("name",audioStr);
-                        Intent intent= new Intent(this,TakeMessageTextActivity.class);
+                        Intent intent = new Intent(this,TakeMessageTextActivity.class);
                         intent.putExtra("Selected_name",audioStr);
                         startActivity(intent);
                     }
