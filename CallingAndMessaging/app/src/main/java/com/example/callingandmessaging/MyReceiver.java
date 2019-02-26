@@ -20,15 +20,15 @@ public class MyReceiver extends BroadcastReceiver {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 
-        Intent intent1=new Intent(context,NotificationReceiver.class);
+        Intent intent1 = new Intent(context,CallActivity.class);
         intent1.putExtra("Selected_name",intent.getStringExtra("Selected_name"));
         PendingIntent pendingIntent = PendingIntent.getActivity(context,0,intent1,PendingIntent.FLAG_UPDATE_CURRENT);
         Log.d("inmyreceiver",intent.getStringExtra("Selected_name"));
 
         Intent clearIntent = new Intent(context,ClearNotification.class);
         int notification_id = (int)System.currentTimeMillis()%20000;
-        if(notification_id<0){
-            notification_id+=20000;
+        if(notification_id < 0){
+            notification_id += 20000;
         }
         Log.d("id of intent is \t",String.valueOf(notification_id));
 
@@ -37,8 +37,8 @@ public class MyReceiver extends BroadcastReceiver {
 
         builder.setContentIntent(pendingIntent);
         builder.setSmallIcon(R.drawable.ic_launcher_background);
-        builder.setContentTitle("My Notification Title");
-        builder.setContentText("Notification from My App..");
+        builder.setContentTitle("Call " + intent.getStringExtra("Selected_name"));
+        builder.setContentText("Do you want to call?");
         builder.addAction(R.color.colorAccent,"MAKE CALL",pendingIntent);
         builder.addAction(R.color.colorAccent,"CANCEL",clearPendingIntent);
 
