@@ -34,9 +34,9 @@ public class ContactList extends Application implements Runnable {
 
 
             ContentResolver contentResolver=getContentResolver();
-            int j,q=0;
+            int j,q = 0;
 
-            String[] mColunmProjection=new String[]{
+            String[] mColunmProjection = new String[]{
                     ContactsContract.Contacts._ID,
                     ContactsContract.Contacts.CONTACT_STATUS,
                     ContactsContract.Contacts.DISPLAY_NAME_PRIMARY,
@@ -46,7 +46,7 @@ public class ContactList extends Application implements Runnable {
             //fetch contact list
             Cursor cursor=contentResolver.query(ContactsContract.Contacts.CONTENT_URI,mColunmProjection,null,null,"DISPLAY_NAME ASC");
 
-            if(cursor!=null && cursor.getCount()>0){
+            if(cursor != null && cursor.getCount() > 0){
 
                 while(cursor.moveToNext()) {
                     Person person = new Person();
@@ -95,8 +95,7 @@ public class ContactList extends Application implements Runnable {
 
                     person.setContact_no(contact_number);
                     if (q != 0) {
-//                        Log.d("person no. is ",person.getName());
-                        if(person.getName()!=null) {
+                        if(person.getName() != null) {
                             personList.add(person);
                             Log.d("name", person.getName());
                         }
@@ -118,18 +117,5 @@ public class ContactList extends Application implements Runnable {
                     }
                 });
             }
-
-//            Iterator itr = personList.iterator();
-//            Person person=null;
-//            try{
-//            Log.d("size ",String.valueOf(personList.size()));
-//            while(itr.hasNext()){
-//                person =(Person)itr.next();
-//                Log.d("trying to get ame",person.getName());
-//
-//
-//            }}catch (NullPointerException e){
-//
-//            }
         }
 }

@@ -33,8 +33,8 @@ public class TakeMessageTextActivity extends Activity {
         switch(requestCode){
             case 10:
 
-                if(resultCode==RESULT_OK && data!=null ){
-                    ArrayList<String> result=data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                if(resultCode == RESULT_OK && data != null ){
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     text_of_audio=result.get(0);
 
                     Bundle b = getIntent().getExtras();
