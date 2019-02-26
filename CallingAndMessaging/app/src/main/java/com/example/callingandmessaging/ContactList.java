@@ -95,9 +95,11 @@ public class ContactList extends Application implements Runnable {
 
                     person.setContact_no(contact_number);
                     if (q != 0) {
-//                        Log.d("adsasdadasdad",person.getName());
-                        personList.add(person);
-//                        Log.d("name", person.getName());
+//                        Log.d("person no. is ",person.getName());
+                        if(person.getName()!=null) {
+                            personList.add(person);
+                            Log.d("name", person.getName());
+                        }
                     }
                 }
                 mainHandler.post(new Runnable() {

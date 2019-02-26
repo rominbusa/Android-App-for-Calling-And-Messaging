@@ -78,14 +78,30 @@ public class BuildURL {
             JSONArray t = null;
             if(s!=null && !s.equals("")){
                 try {
-                    JSONObject contact= new JSONObject(s);
-                    JSONObject entity=contact.getJSONObject("entities");
-                    JSONArray doit=entity.getJSONArray("call");
-                    JSONObject what=doit.getJSONObject(0);
-                    whattodo=what.getString("value");
-                    JSONArray Name=entity.getJSONArray("contact");
-                    JSONObject uname=Name.getJSONObject(0);
-                    name=uname.getString("value");
+                    JSONObject contact = new JSONObject(s);
+                    JSONObject entity = contact.getJSONObject("entities");
+                  try{
+                      if(entity.getJSONArray("call") != null) {
+                        JSONArray doit = entity.getJSONArray("call");
+                        JSONObject what = doit.getJSONObject(0);
+                        whattodo = what.getString("value");
+                    }
+                  }catch (JSONException e){
+                      Log.d("no value for call","user doesn't want to call");
+                  }
+
+                  try {
+                      if (entity.getJSONArray("message") != null) {
+                          JSONArray messageArr = entity.getJSONArray("message");
+                          JSONObject messageObj = messageArr.getJSONObject(0);
+                          whattodo = messageObj.getString("value");
+                      }
+                  }catch (JSONException e){
+                      Log.d("no value for message","user doesn't want to message");
+                  }
+                    JSONArray Name = entity.getJSONArray("contact");
+                    JSONObject uname = Name.getJSONObject(0);
+                    name = uname.getString("value");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
