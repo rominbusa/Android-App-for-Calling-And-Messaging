@@ -53,6 +53,13 @@ public class AudioRecorder extends Activity {
                         intent.putExtra("name",audioStr);
                         startActivity(intent);
                     }
+                    else if(audioStr.contains("message")) {
+                        audioStr = audioStr.substring(7);
+                        Log.d("name",audioStr);
+                        Intent intent= new Intent(this,TakeMessageTextActivity.class);
+                        intent.putExtra("Selected_name",audioStr);
+                        startActivity(intent);
+                    }
                     Log.d("audio",audioStr);
                 }
                 break;

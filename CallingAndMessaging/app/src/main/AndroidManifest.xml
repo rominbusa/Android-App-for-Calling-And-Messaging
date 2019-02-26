@@ -18,6 +18,7 @@
         <activity android:name=".ContactListActivity" />
         <activity android:name=".TimerActivity" />
         <activity android:name=".MessageActivity"></activity>
+        <activity android:name=".TakeMessageTextActivity"/>
         <activity android:name=".AudioRecorder"></activity>
         <activity android:name=".NotificationReceiver"></activity>
         <activity android:name=".CallActivity"></activity>
