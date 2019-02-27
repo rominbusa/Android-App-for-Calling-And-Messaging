@@ -27,28 +27,7 @@ public class MessageActivity extends Activity {
         setContentView(R.layout.activity_timer);
         Log.d("messageText",getIntent().getStringExtra("messageText"));
 
-        searchContact();
-
-    }
-
-    protected void searchContact(){
-        String name = getIntent().getStringExtra("Selected_name");
-        msg = getIntent().getStringExtra("messageText");
-        if(name == null){
-            return;
-        }
-        ContactList contactList = (ContactList)getApplicationContext();
-        ArrayList<Person> personArr = contactList.getPerson();
-
-        Log.d("name is ",name);
-        for(int i = 0;i<personArr.size();i++){
-            if(name.toLowerCase().contains(personArr.get(i).getName().toLowerCase())){
-                number = personArr.get(i).getContact_no()[0];
-                Log.d("your selected name is",number);
-                break;
-            }
-        }
-
+        //searchContact();
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
             //write code if you want to show any message like permission already granted
             SendMessage();
@@ -58,6 +37,8 @@ public class MessageActivity extends Activity {
     }
 
     protected void SendMessage(){
+        msg = getIntent().getStringExtra("messageText");
+        number = getIntent().getStringExtra("number");
         if(number != null && msg != null) {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(number,null,msg,null,null);

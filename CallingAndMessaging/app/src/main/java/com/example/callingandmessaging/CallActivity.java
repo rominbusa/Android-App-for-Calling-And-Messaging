@@ -24,37 +24,17 @@ public class CallActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        searchContact();
-    }
-
-    protected void searchContact(){
-        String name=getIntent().getStringExtra("Selected_name");
-        if(name == null){
-            return;
-        }
-        ContactList contactList = (ContactList)getApplicationContext();
-        ArrayList<Person> personArr = contactList.getPerson();
-
-        Log.d("name is ",name);
-        for(int i = 0; i<personArr.size() ; i++){
-            if(name.toLowerCase().contains(personArr.get(i).getName().toLowerCase())){
-                number = personArr.get(i).getContact_no()[0];
-                Log.d("your selected name is",number);
-                break;
-            }
-        }
-
-        
-
+        number = getIntent().getStringExtra("number");
+        //searchContact();
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED){
             //write code if you want to show any message like permission already granted
             makecall();
-        }else{
+        } else {
             requestCallPermission();
         }
     }
 
-    protected void makecall(){
+    protected void makecall() {
         if(number != null) {
             Intent callIntent = new Intent(Intent.ACTION_CALL);
             callIntent.setData(Uri.parse("tel:" + number));
@@ -84,17 +64,17 @@ public class CallActivity extends Activity {
                             dialog.dismiss();
                         }
                     }).create().show();
-        }else{
+        }else {
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CALL_PHONE},CALL_CODE);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if(requestCode == CALL_CODE){
-            if(grantResults.length>0  && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if(requestCode == CALL_CODE) {
+            if(grantResults.length>0  && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 makecall();
-            }else{
+            } else {
                 Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
             }
         }

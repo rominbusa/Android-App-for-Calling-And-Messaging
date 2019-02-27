@@ -1,12 +1,15 @@
 package com.example.callingandmessaging;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,12 +17,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class TimerActivity extends AppCompatActivity {
 
     AlarmManager alarmManager;
     PendingIntent pendingIntent;
+    String msg;
+    String number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,30 +57,54 @@ public class TimerActivity extends AppCompatActivity {
 
 
 
+        searchContact();
 
         alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
         if(getIntent().getStringExtra("option").equals("Call")) {
             Intent intent = new Intent(this, MyReceiver.class);
             Log.d("slected-name", getIntent().getStringExtra("Selected_name"));
-            intent.putExtra("Selected_name", getIntent().getStringExtra("Selected_name"));
+            intent.putExtra("Selected_name",getIntent().getStringExtra("Selected_name"));
+            intent.putExtra("number", number);
             int m = (int) System.currentTimeMillis() % 50000;
             pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), m, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
         }
+
         //for message
         else {
             EditText messageEditText = findViewById(R.id.editText);
             String messageText = messageEditText.getText().toString();
 
             Intent intent1 = new Intent(this,MessageActivity.class);
-            intent1.putExtra("Selected_name", getIntent().getStringExtra("Selected_name"));
+            //searchContact(getIntent().getStringExtra("Selected_name"));
+            intent1.putExtra("number", number);
             intent1.putExtra("messageText",messageText);
             int m = (int) System.currentTimeMillis() % 50000;
             pendingIntent = PendingIntent.getActivity(this.getApplicationContext(), m, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
             Log.d("msg",messageText);
         }
+    }
+
+    protected void searchContact(){
+        String name = getIntent().getStringExtra("Selected_name");
+        msg = getIntent().getStringExtra("messageText");
+        if(name == null){
+            return;
+        }
+        ContactList contactList = (ContactList)getApplicationContext();
+        ArrayList<Person> personArr = contactList.getPerson();
+
+        Log.d("name is ",name);
+        for(int i = 0;i<personArr.size();i++){
+            if(name.toLowerCase().contains(personArr.get(i).getName().toLowerCase())){
+                number = personArr.get(i).getContact_no()[0];
+                Log.d("your selected name is",number);
+                break;
+            }
+        }
+
     }
 }
