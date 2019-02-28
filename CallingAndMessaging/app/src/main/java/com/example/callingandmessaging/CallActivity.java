@@ -24,6 +24,7 @@ public class CallActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        Log.d("asda","asa");
         number = getIntent().getStringExtra("number");
         //searchContact();
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED){

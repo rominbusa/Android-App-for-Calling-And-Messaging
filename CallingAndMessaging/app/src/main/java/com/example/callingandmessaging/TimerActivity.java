@@ -90,7 +90,6 @@ public class TimerActivity extends AppCompatActivity {
 
     protected void searchContact(){
         String name = getIntent().getStringExtra("Selected_name");
-        msg = getIntent().getStringExtra("messageText");
         if(name == null){
             return;
         }
@@ -99,7 +98,7 @@ public class TimerActivity extends AppCompatActivity {
 
         Log.d("name is ",name);
         for(int i = 0;i<personArr.size();i++){
-            if(name.toLowerCase().contains(personArr.get(i).getName().toLowerCase())){
+            if(name.toLowerCase().equals(personArr.get(i).getName().toLowerCase())){
                 number = personArr.get(i).getContact_no()[0];
                 Log.d("your selected name is",number);
                 break;
