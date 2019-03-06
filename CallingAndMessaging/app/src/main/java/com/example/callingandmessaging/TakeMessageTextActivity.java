@@ -41,7 +41,7 @@ public class TakeMessageTextActivity extends Activity {
 
                     Intent intent = new Intent(this,MessageActivity.class);
                     intent.putExtra("messageText",text_of_audio);
-                    intent.putExtra("Selected_name",b.getString("Selected_name"));
+                    intent.putExtra("number",b.getString("number"));
 
                     startActivity(intent);
                 }
