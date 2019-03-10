@@ -2,6 +2,7 @@ package com.example.callingandmessaging;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.arch.persistence.room.Room;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,12 +12,26 @@ import android.widget.Toast;
 
 public class MyReceiver extends BroadcastReceiver {
 
+    private static CallTimerDatabase callTimerDatabase;
+    private CallTimeTable callTimeTable;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
         Log.d("works","success it works\n");
         Toast.makeText(context,"ALARM",Toast.LENGTH_LONG).show();
 
+        callTimerDatabase = Room.databaseBuilder(context.getApplicationContext(),CallTimerDatabase.class,"CallTimerdb").allowMainThreadQueries().build();
+
+        callTimeTable = MyReceiver.callTimerDatabase.callDao().getCallTimerById(intent.getIntExtra("id",-1));
+
+        Log.d("m:", String.valueOf(intent.getIntExtra("id", 0)));
+
+        if(callTimeTable == null)
+        {
+            Toast.makeText(context, "it is deleted", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 

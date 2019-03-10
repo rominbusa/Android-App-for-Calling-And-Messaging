@@ -21,6 +21,11 @@ public class MyCallTimerAdapter extends RecyclerView.Adapter<MyCallTimerAdapter.
         this.callTimeTableList = callTimeTableList;
     }
 
+    public CallTimeTable getCallTimerAt (int position)
+    {
+        return callTimeTableList.get(position);
+    }
+
     @NonNull
     @Override
     public MyCallTimerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -35,7 +40,7 @@ public class MyCallTimerAdapter extends RecyclerView.Adapter<MyCallTimerAdapter.
         holder.nameTextView.setText(callTimeTableList.get(position).getName());
         holder.numberTextView.setText(callTimeTableList.get(position).getNumber());
         holder.timeTextView.setText(callTimeTableList.get(position).getTime());
-        holder.idTextView.setText(callTimeTableList.get(position).getId());
+        //holder.idTextView.setText(callTimeTableList.get(position).getId());
         //holder.imageView.
     }
 
@@ -49,8 +54,8 @@ public class MyCallTimerAdapter extends RecyclerView.Adapter<MyCallTimerAdapter.
         public TextView numberTextView;
         public TextView timeTextView;
         public LinearLayout linearLayout;
-        public TextView idTextView;
-        public ImageView imageView;
+        //public TextView idTextView;
+        //public ImageView imageView;
         //public CardView cardView;
 
         public MyCallTimerViewHolder(View v) {
@@ -59,8 +64,8 @@ public class MyCallTimerAdapter extends RecyclerView.Adapter<MyCallTimerAdapter.
             nameTextView = v.findViewById(R.id.name);
             numberTextView = v.findViewById(R.id.number);
             timeTextView = v.findViewById(R.id.time);
-            idTextView = v.findViewById(R.id.id);
-            imageView = v.findViewById(R.id.imageView);
+          //  idTextView = v.findViewById(R.id.id);
+           // imageView = v.findViewById(R.id.imageView);
         }
     }
 }

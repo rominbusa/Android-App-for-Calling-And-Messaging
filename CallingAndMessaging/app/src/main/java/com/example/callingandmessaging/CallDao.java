@@ -18,4 +18,7 @@ public interface CallDao {
 
     @Delete
     public void deleteTimer(CallTimeTable callTimeTable);
+
+    @Query("select * from CallTimeTable where id LIKE :nid")
+    public CallTimeTable getCallTimerById(int nid);
 }

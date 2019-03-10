@@ -31,6 +31,8 @@ public class TimerActivity extends AppCompatActivity {
     String msg;
     String number;
     public static CallTimerDatabase callTimerDatabase;
+    public static MessageTimerDatabase messageTimerDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,7 @@ public class TimerActivity extends AppCompatActivity {
         }
         else {
             setContentView(R.layout.activity_message_timer);
+            messageTimerDatabase = Room.databaseBuilder(getApplicationContext(), MessageTimerDatabase.class, "MessageTimerdb").allowMainThreadQueries().build();
         }
     }
 
@@ -67,15 +70,20 @@ public class TimerActivity extends AppCompatActivity {
 
         alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
+        SimpleDateFormat format = new SimpleDateFormat("h:mm a");
+        Toast.makeText(this,format.format(calendar.getTime()),Toast.LENGTH_SHORT).show();
+
         if(getIntent().getStringExtra("option").equals("Call")) {
             Intent intent = new Intent(this, MyReceiver.class);
             Log.d("slected-name", getIntent().getStringExtra("Selected_name"));
             intent.putExtra("Selected_name",getIntent().getStringExtra("Selected_name"));
             intent.putExtra("number", number);
             int m = (int) System.currentTimeMillis() % 50000;
+            Log.d("m:", String.valueOf(m));
+            intent.putExtra("id", m);
+//             intent.putExtra("requestCode", m);
 
-            SimpleDateFormat format = new SimpleDateFormat("h:mm a");
-            Toast.makeText(this,format.format(calendar.getTime()),Toast.LENGTH_SHORT).show();
+
 
             CallTimeTable callTimeTable = new CallTimeTable();
             callTimeTable.setId(m);
@@ -95,12 +103,24 @@ public class TimerActivity extends AppCompatActivity {
         else {
             EditText messageEditText = findViewById(R.id.editText);
             String messageText = messageEditText.getText().toString();
+            int m = (int) System.currentTimeMillis() % 50000;
+
+            MessageTimeTable messageTimeTable = new MessageTimeTable();
+            messageTimeTable.setId(m);
+            messageTimeTable.setName(getIntent().getStringExtra("Selected_name"));
+            messageTimeTable.setTime(format.format(calendar.getTime()).toString());
+            messageTimeTable.setNumber(number);
+            messageTimeTable.setMessageText(messageText);
+            TimerActivity.messageTimerDatabase.messageDao().addTimer(messageTimeTable);
+            Toast.makeText(this, "Message Timer Added", Toast.LENGTH_SHORT).show();
 
             Intent intent1 = new Intent(this,MessageActivity.class);
             //searchContact(getIntent().getStringExtra("Selected_name"));
+            intent1.putExtra("Timer", "Timer");
+            intent1.putExtra("id", m);
             intent1.putExtra("number", number);
             intent1.putExtra("messageText",messageText);
-            int m = (int) System.currentTimeMillis() % 50000;
+
             pendingIntent = PendingIntent.getActivity(this.getApplicationContext(), m, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
             Log.d("msg",messageText);

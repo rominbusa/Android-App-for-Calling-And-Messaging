@@ -7,38 +7,33 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
-public class DisplayCallTimers extends Activity {
-
-    public static CallTimerDatabase callTimerDatabase;
+public class DisplayMessageTimers extends Activity {
+    public static MessageTimerDatabase messageTimerDatabase;
 
     private RecyclerView recyclerView;
-    private MyCallTimerAdapter mAdapter;
+    private MessageTimerAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.display_call_timers);
+        setContentView(R.layout.display_message_timer);
 
-        callTimerDatabase = Room.databaseBuilder(getApplicationContext(),CallTimerDatabase.class,"CallTimerdb").allowMainThreadQueries().build();
-
-        final List<CallTimeTable> callTimeTables = DisplayCallTimers.callTimerDatabase.callDao().gerCallTimers();
+        messageTimerDatabase = Room.databaseBuilder(getApplicationContext(), MessageTimerDatabase.class, "MessageTimerdb").allowMainThreadQueries().build();
+        final List<MessageTimeTable> messageTimeTables = DisplayMessageTimers.messageTimerDatabase.messageDao().getAllTimers();
 
         //for recyclerview
-        recyclerView = (RecyclerView) findViewById(R.id.callTimerRecyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.messageTimerRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MyCallTimerAdapter(callTimeTables);
+        mAdapter = new MessageTimerAdapter(messageTimeTables);
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
                 return false;
@@ -46,14 +41,13 @@ public class DisplayCallTimers extends Activity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-                DisplayCallTimers.callTimerDatabase.callDao().deleteTimer(mAdapter.getCallTimerAt(viewHolder.getAdapterPosition()));
-                callTimeTables.remove(mAdapter.getCallTimerAt(viewHolder.getAdapterPosition()));
+                DisplayMessageTimers.messageTimerDatabase.messageDao().deleteTimer(mAdapter.getMessageAt(viewHolder.getAdapterPosition()));
+                messageTimeTables.remove(mAdapter.getMessageAt(viewHolder.getAdapterPosition()));
                 mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
 
-                Toast.makeText(getApplicationContext(), "swiped", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Message item Removed by swipe",Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
-
         recyclerView.setAdapter(mAdapter);
     }
 }

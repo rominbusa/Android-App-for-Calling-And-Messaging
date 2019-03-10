@@ -18,4 +18,7 @@ public interface MessageDao {
 
     @Delete
     public void deleteTimer(MessageTimeTable messageTimeTable);
+
+    @Query("select * from MessageTimeTable where id LIKE :nid")
+    public MessageTimeTable getMessageTimerById(int nid);
 }

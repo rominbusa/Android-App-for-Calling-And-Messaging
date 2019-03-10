@@ -3,6 +3,7 @@ package com.example.callingandmessaging;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.arch.persistence.room.Room;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SearchRecentSuggestionsProvider;
@@ -21,9 +22,23 @@ public class MessageActivity extends Activity {
     String number;
     private int SEND_MESSAGE_CODE = 1;
     String msg;
+    private MessageTimerDatabase messageTimerDatabase;
+    private MessageTimeTable messageTimeTable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        messageTimerDatabase = Room.databaseBuilder(getApplicationContext(), MessageTimerDatabase.class, "MessageTimerdb").allowMainThreadQueries().build();
+        if(getIntent().getStringExtra("Timer") != null)
+        {
+            messageTimeTable = this.messageTimerDatabase.messageDao().getMessageTimerById(getIntent().getIntExtra("id",-1));
+            if(messageTimeTable == null)
+            {
+                Toast.makeText(getApplicationContext(), "message timer is deleted", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
         setContentView(R.layout.activity_timer);
         Log.d("messageText",getIntent().getStringExtra("messageText"));
 
@@ -37,6 +52,7 @@ public class MessageActivity extends Activity {
     }
 
     protected void SendMessage(){
+
         msg = getIntent().getStringExtra("messageText");
         number = getIntent().getStringExtra("number");
         if(number != null && msg != null) {
