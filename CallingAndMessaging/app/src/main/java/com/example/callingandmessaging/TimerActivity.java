@@ -4,6 +4,8 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.arch.persistence.room.Room;
+import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,7 +18,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -26,12 +30,14 @@ public class TimerActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
     String msg;
     String number;
-
+    public static CallTimerDatabase callTimerDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if(getIntent().getStringExtra("option").equals("Call")) {
             setContentView(R.layout.activity_timer);
+            callTimerDatabase = Room.databaseBuilder(getApplicationContext(),CallTimerDatabase.class,"CallTimerdb").allowMainThreadQueries().build();
         }
         else {
             setContentView(R.layout.activity_message_timer);
@@ -67,6 +73,19 @@ public class TimerActivity extends AppCompatActivity {
             intent.putExtra("Selected_name",getIntent().getStringExtra("Selected_name"));
             intent.putExtra("number", number);
             int m = (int) System.currentTimeMillis() % 50000;
+
+            SimpleDateFormat format = new SimpleDateFormat("h:mm a");
+            Toast.makeText(this,format.format(calendar.getTime()),Toast.LENGTH_SHORT).show();
+
+            CallTimeTable callTimeTable = new CallTimeTable();
+            callTimeTable.setId(m);
+            callTimeTable.setName(getIntent().getStringExtra("Selected_name"));
+            callTimeTable.setTime(format.format(calendar.getTime()).toString());
+            callTimeTable.setNumber(number);
+            TimerActivity.callTimerDatabase.callDao().addTimer(callTimeTable);
+
+            Toast.makeText(this,"updated",Toast.LENGTH_SHORT).show();
+
             pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), m, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
@@ -104,6 +123,5 @@ public class TimerActivity extends AppCompatActivity {
                 break;
             }
         }
-
     }
 }
