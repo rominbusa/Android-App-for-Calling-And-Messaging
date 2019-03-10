@@ -51,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void seeTimres(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, DisplayCallTimers.class);
+        startActivity(intent);
+    }
+
     protected void requestReadContactPermission(){
         if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_CONTACTS)){
             new AlertDialog.Builder(this)
