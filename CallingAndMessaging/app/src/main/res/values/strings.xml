@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CallingAndMessaging</string>
+    <string name="voiceButton">speak</string>
+    <string name="callByTimer">Schedule Call</string>
+    <string name="messageByTimer">Schedule Message</string>
+    <string name="userGuide">User Info</string>
 </resources>

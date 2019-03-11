@@ -8,22 +8,27 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private int READ_CONTACT_CODE = 1;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        actionBar = getSupportActionBar();
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED){
             //write code if you want to show any message like permission already granted
@@ -33,7 +38,39 @@ public class MainActivity extends AppCompatActivity {
             requestReadContactPermission();
         }
 
+
+        //for bottom navigation bar
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.voiceButton:
+                        // do something here
+                        actionBar.setTitle("Speak");
+                        getVoice(item.getActionView());
+                        return true;
+                    case R.id.callByTimer:
+                        // do something here
+                        actionBar.setTitle("Schedule Call");
+                        setTimerByCall(item.getActionView());
+                        return true;
+                    case R.id.messageByTimer:
+                        // do something here
+                        actionBar.setTitle("Schedule Message");
+                        setTimerByMessage(item.getActionView());
+                        return true;
+                    case R.id.userGuide:
+                        //do something here
+                        actionBar.setTitle("User Manual");
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
     }
+
 
     public void setTimerByCall(View view) {
         Intent intent= new Intent(MainActivity.this,DisplayContactListActivity.class);
