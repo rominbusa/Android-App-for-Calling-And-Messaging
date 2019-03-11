@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -51,9 +52,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void seeTimres(View view)
+    public void seeCallTimers(View view)
     {
         Intent intent = new Intent(MainActivity.this, DisplayCallTimers.class);
+        startActivity(intent);
+    }
+
+    public void seeMessageTimers(View view) {
+        Intent intent = new Intent(MainActivity.this, DisplayMessageTimers.class);
         startActivity(intent);
     }
 

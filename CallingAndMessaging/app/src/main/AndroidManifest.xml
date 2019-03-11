@@ -24,6 +24,7 @@
         <activity android:name=".NotificationReceiver"></activity>
         <activity android:name=".CallActivity"></activity>
         <activity android:name=".DisplayContactListActivity"></activity>
+        <activity android:name=".DisplayMessageTimers"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
