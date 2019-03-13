@@ -1,63 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="100dp"
-        android:text="Call By Voice"
-        android:onClick="getVoice"
-        tools:ignore="OnClick" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="170dp"
-        android:text="Message By Voice"
-        android:onClick="getVoice" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="248dp"
-        android:onClick="setTimerByCall"
-        android:text="Call By Timer" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="348dp"
-        android:onClick="setTimerByMessage"
-        android:text="Message By Timer" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/menu_bottom_navigation"></android.support.design.widget.BottomNavigationView>
 
     <Button
         android:id="@+id/seeCallTimers"
@@ -68,13 +23,17 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="53dp"
-        android:layout_marginLeft="53dp"
-        android:layout_marginEnd="243dp"
-        android:layout_marginRight="243dp"
-        android:layout_marginBottom="33dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:onClick="seeCallTimers"
-        android:text="see timers" />
+        android:text="see call timers"
+        app:layout_constraintEnd_toStartOf="@+id/seeMessageTimers"
+        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/seeMessageTimers"
@@ -83,13 +42,130 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="-70dp"
-        android:layout_marginTop="427dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginRight="56dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="80dp"
         android:onClick="seeMessageTimers"
-        android:text="See Message Timers" />
+        android:text="See Message Timers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="354dp"
+        android:layout_height="385dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.903" />
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context=".MainActivity">-->
+
+    <!--<Button-->
+        <!--android:id="@+id/button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginStart="100dp"-->
+        <!--android:layout_marginLeft="100dp"-->
+        <!--android:layout_marginTop="100dp"-->
+        <!--android:text="Call By Voice"-->
+        <!--android:onClick="getVoice"-->
+        <!--tools:ignore="OnClick" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/button5"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginStart="100dp"-->
+        <!--android:layout_marginLeft="100dp"-->
+        <!--android:layout_marginTop="170dp"-->
+        <!--android:text="Message By Voice"-->
+        <!--android:onClick="getVoice" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/button2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginStart="100dp"-->
+        <!--android:layout_marginLeft="100dp"-->
+        <!--android:layout_marginTop="248dp"-->
+        <!--android:onClick="setTimerByCall"-->
+        <!--android:text="Call By Timer" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/button4"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginStart="100dp"-->
+        <!--android:layout_marginLeft="100dp"-->
+        <!--android:layout_marginTop="348dp"-->
+        <!--android:onClick="setTimerByMessage"-->
+        <!--android:text="Message By Timer" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/seeCallTimers"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginStart="53dp"-->
+        <!--android:layout_marginLeft="53dp"-->
+        <!--android:layout_marginEnd="243dp"-->
+        <!--android:layout_marginRight="243dp"-->
+        <!--android:layout_marginBottom="33dp"-->
+        <!--android:onClick="seeCallTimers"-->
+        <!--android:text="see timers" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/seeMessageTimers"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginStart="-70dp"-->
+        <!--android:layout_marginTop="427dp"-->
+        <!--android:layout_marginEnd="56dp"-->
+        <!--android:layout_marginRight="56dp"-->
+        <!--android:layout_marginBottom="0dp"-->
+        <!--android:onClick="seeMessageTimers"-->
+        <!--android:text="See Message Timers" />-->
+
+
+<!--</RelativeLayout>-->

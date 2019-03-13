@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/voiceButton"
+        android:enabled="true"
+        android:icon="@drawable/ic_mic_black_24dp"
+        android:title="@string/voiceButton"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/callByTimer"
+        android:enabled="true"
+        android:icon="@drawable/ic_schedule_black_24dp"
+        android:title="@string/callByTimer"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/messageByTimer"
+        android:enabled="true"
+        android:icon="@drawable/ic_schedule_black_24dp"
+        android:title="@string/messageByTimer"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/userGuide"
+        android:enabled="true"
+        android:icon="@drawable/ic_account_box_black_24dp"
+        android:title="@string/userGuide"
+        app:showAsAction="ifRoom" />
+</menu>
