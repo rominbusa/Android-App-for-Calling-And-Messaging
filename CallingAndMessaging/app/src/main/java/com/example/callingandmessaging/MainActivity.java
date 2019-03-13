@@ -6,10 +6,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SeeCallTimerFragment.OnFragmentInteractionListener, SeeMessageTimerFragment.OnFragmentInteractionListener {
 
     private int READ_CONTACT_CODE = 1;
     private ActionBar actionBar;
@@ -71,6 +75,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Fragment fragment = new SeeCallTimerFragment();
+        loadFragment(fragment);
+    }
+
+    private void loadFragment(Fragment fragment)
+    {
+        //load the fragment
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_container, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
 
     public void setTimerByCall(View view) {
         Intent intent= new Intent(MainActivity.this,DisplayContactListActivity.class);
@@ -91,13 +110,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void seeCallTimers(View view)
     {
-        Intent intent = new Intent(MainActivity.this, DisplayCallTimers.class);
-        startActivity(intent);
+        Fragment fragment = new SeeCallTimerFragment();
+        loadFragment(fragment);
+//        Intent intent = new Intent(MainActivity.this, DisplayCallTimers.class);
+//        startActivity(intent);
     }
 
-    public void seeMessageTimers(View view) {
-        Intent intent = new Intent(MainActivity.this, DisplayMessageTimers.class);
-        startActivity(intent);
+    public void seeMessageTimers(View view)
+    {
+        Fragment fragment = new SeeMessageTimerFragment();
+        loadFragment(fragment);
+//        Intent intent = new Intent(MainActivity.this, DisplayMessageTimers.class);q
+//        startActivity(intent);
     }
 
     protected void requestReadContactPermission(){
@@ -132,5 +156,10 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
