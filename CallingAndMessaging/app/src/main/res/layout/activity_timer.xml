@@ -10,13 +10,13 @@
         android:id="@+id/timePicker1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:timePickerMode="spinner"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="143dp"
+        android:timePickerMode="spinner" />
 
     <Button
         android:id="@+id/button3"
@@ -26,10 +26,30 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="128dp"
-        android:layout_marginLeft="128dp"
-        android:layout_marginTop="309dp"
+        android:layout_marginStart="131dp"
+        android:layout_marginLeft="131dp"
+        android:layout_marginTop="413dp"
         android:onClick="settimer"
         android:text="Set Timer" />
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="254dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="82dp"
+        android:layout_marginRight="82dp"
+        android:clickable="true"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="Select date"
+        android:inputType="date" />
 
 </RelativeLayout>
