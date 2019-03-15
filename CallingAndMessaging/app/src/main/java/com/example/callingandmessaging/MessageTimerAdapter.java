@@ -32,7 +32,7 @@ public class MessageTimerAdapter extends RecyclerView.Adapter<MessageTimerAdapte
 
         holder.nameTextView.setText(messageTimeTablesList.get(position).getName());
         holder.messageText.setText(messageTimeTablesList.get(position).getMessageText());
-        holder.timeTextView.setText(messageTimeTablesList.get(position).getTime());
+        holder.timeTextView.setText(messageTimeTablesList.get(position).getDate()+" "+messageTimeTablesList.get(position).getTime());
         holder.numberTextView.setText(messageTimeTablesList.get(position).getNumber());
 
     }

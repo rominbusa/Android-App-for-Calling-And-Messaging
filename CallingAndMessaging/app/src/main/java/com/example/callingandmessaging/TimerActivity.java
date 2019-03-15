@@ -35,6 +35,7 @@ public class TimerActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
     String msg;
     String number;
+    String dateStr;
     public static CallTimerDatabase callTimerDatabase;
     public static MessageTimerDatabase messageTimerDatabase;
     Calendar calendar;
@@ -64,6 +65,7 @@ public class TimerActivity extends AppCompatActivity {
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel();
+                dateStr = String.valueOf(dayOfMonth) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
             }
         };
         editText.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +128,7 @@ public class TimerActivity extends AppCompatActivity {
             callTimeTable.setName(getIntent().getStringExtra("Selected_name"));
             callTimeTable.setTime(format.format(calendar.getTime()).toString());
             callTimeTable.setNumber(number);
+            callTimeTable.setDate(dateStr);
             TimerActivity.callTimerDatabase.callDao().addTimer(callTimeTable);
 
             Toast.makeText(this,"updated",Toast.LENGTH_SHORT).show();
@@ -147,6 +150,7 @@ public class TimerActivity extends AppCompatActivity {
             messageTimeTable.setTime(format.format(calendar.getTime()).toString());
             messageTimeTable.setNumber(number);
             messageTimeTable.setMessageText(messageText);
+            messageTimeTable.setDate(dateStr);
             TimerActivity.messageTimerDatabase.messageDao().addTimer(messageTimeTable);
             Toast.makeText(this, "Message Timer Added", Toast.LENGTH_SHORT).show();
 
