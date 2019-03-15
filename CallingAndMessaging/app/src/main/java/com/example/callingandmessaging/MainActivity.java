@@ -10,11 +10,13 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,26 +24,33 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements SeeCallTimerFragment.OnFragmentInteractionListener, SeeMessageTimerFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements SeeMessageTimerFragment.OnFragmentInteractionListener, SeeCallTimerFragment.OnFragmentInteractionListener  {
 
     private int READ_CONTACT_CODE = 1;
-    private ActionBar actionBar;
+    private ViewPager viewPager;
+    private ViewPagerAdapter adapter;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        actionBar = getSupportActionBar();
+        //ViewPager for Tabs
+        viewPager = findViewById(R.id.pager);
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+        tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED){
+        //checking permissions
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
             //write code if you want to show any message like permission already granted
-            ContactList contactList = (ContactList)getApplicationContext();
+            ContactList contactList = (ContactList) getApplicationContext();
             new Thread(contactList).start();
-        }else{
+        } else {
             requestReadContactPermission();
         }
-
 
         //for bottom navigation bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
@@ -51,22 +60,18 @@ public class MainActivity extends AppCompatActivity implements SeeCallTimerFragm
                 switch (item.getItemId()) {
                     case R.id.voiceButton:
                         // do something here
-                        actionBar.setTitle("Speak");
                         getVoice(item.getActionView());
                         return true;
                     case R.id.callByTimer:
                         // do something here
-                        actionBar.setTitle("Schedule Call");
                         setTimerByCall(item.getActionView());
                         return true;
                     case R.id.messageByTimer:
                         // do something here
-                        actionBar.setTitle("Schedule Message");
                         setTimerByMessage(item.getActionView());
                         return true;
                     case R.id.userGuide:
                         //do something here
-                        actionBar.setTitle("User Manual");
                         return true;
                     default:
                         return false;
@@ -78,18 +83,9 @@ public class MainActivity extends AppCompatActivity implements SeeCallTimerFragm
     @Override
     protected void onStart() {
         super.onStart();
-        Fragment fragment = new SeeCallTimerFragment();
-        loadFragment(fragment);
+        viewPager.setAdapter(adapter);
     }
 
-    private void loadFragment(Fragment fragment)
-    {
-        //load the fragment
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frame_container, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
 
     public void setTimerByCall(View view) {
         Intent intent= new Intent(MainActivity.this,DisplayContactListActivity.class);
@@ -108,27 +104,11 @@ public class MainActivity extends AppCompatActivity implements SeeCallTimerFragm
         startActivity(intent);
     }
 
-    public void seeCallTimers(View view)
-    {
-        Fragment fragment = new SeeCallTimerFragment();
-        loadFragment(fragment);
-//        Intent intent = new Intent(MainActivity.this, DisplayCallTimers.class);
-//        startActivity(intent);
-    }
-
-    public void seeMessageTimers(View view)
-    {
-        Fragment fragment = new SeeMessageTimerFragment();
-        loadFragment(fragment);
-//        Intent intent = new Intent(MainActivity.this, DisplayMessageTimers.class);q
-//        startActivity(intent);
-    }
-
     protected void requestReadContactPermission(){
         if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_CONTACTS)){
             new AlertDialog.Builder(this)
                     .setTitle("permission is needed to Read Contact")
-                    .setMessage("some funtionalities might not work properly")
+                    .setMessage("some functionalities might not work properly")
                     .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -160,6 +140,6 @@ public class MainActivity extends AppCompatActivity implements SeeCallTimerFragm
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-
+        
     }
 }
