@@ -83,6 +83,17 @@ public class DisplayContactListActivity extends Activity {
 //                searchContact(s.toString());
                 mAdapter = new ContactListAdapter(searchContact(s.toString()));
                 recyclerView.setAdapter(mAdapter);
+                mAdapter.setOnItemClickListener(new ContactListAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        String selected_name = result.get(position).getName();
+                        Toast.makeText(DisplayContactListActivity.this, "You selected " + selected_name, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(DisplayContactListActivity.this, TimerActivity.class);
+                        intent.putExtra("Selected_name", selected_name);
+                        intent.putExtra("option", getIntent().getStringExtra("option"));
+                        startActivity(intent);
+                    }
+                });
             }
         });
 
