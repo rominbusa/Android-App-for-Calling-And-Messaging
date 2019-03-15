@@ -1,14 +1,21 @@
 package com.example.callingandmessaging;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,13 +26,24 @@ public class DisplayContactListActivity extends Activity {
     private RecyclerView recyclerView;
     private ContactListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private EditText editText;
+    private ArrayList<Person> arr;
+    private ArrayList<Person> result = new ArrayList<Person>();
+    private Toolbar toolbar;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
         ContactList contactList = (ContactList)getApplicationContext();
-        final ArrayList<Person> arr = contactList.getPerson();
+        arr = contactList.getPerson();
+
+        editText = findViewById(R.id.editText);
+
+        //for Toolbar
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Select Contact");
 
         //for recyclerview
         recyclerView = (RecyclerView) findViewById(R.id.contactListRecyclerView);
@@ -47,6 +65,28 @@ public class DisplayContactListActivity extends Activity {
         recyclerView.setAdapter(mAdapter);
 
         Log.d("arraylist size",String.valueOf(arr.size()));
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+//                searchContact(s.toString());
+                mAdapter = new ContactListAdapter(searchContact(s.toString()));
+                recyclerView.setAdapter(mAdapter);
+            }
+        });
+
+
 //        String[] names =new String[arr.size()-1];
 //        try{
 //            for(int i = 0 ; i<arr.size() - 1 ; i++){
@@ -73,5 +113,20 @@ public class DisplayContactListActivity extends Activity {
 
 //            }
 //        });
+    }
+
+    private ArrayList<Person> searchContact(String s){
+//        ArrayList<Person> result = null;
+//        result.clear();
+        if( result != null){
+            result.clear();
+        }
+        for (Person p : arr ) {
+           if (p != null && p.getName().toLowerCase().contains(s) ){
+               Log.d("names",p.getName());
+               result.add(p);
+           }
+        }
+        return result;
     }
 }
