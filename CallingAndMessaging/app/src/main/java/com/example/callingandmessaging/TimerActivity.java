@@ -3,10 +3,12 @@ package com.example.callingandmessaging;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlarmManager;
+import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -16,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -23,6 +26,8 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class TimerActivity extends AppCompatActivity {
 
@@ -32,11 +37,14 @@ public class TimerActivity extends AppCompatActivity {
     String number;
     public static CallTimerDatabase callTimerDatabase;
     public static MessageTimerDatabase messageTimerDatabase;
+    Calendar calendar;
+    EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        calendar = Calendar.getInstance();
         if(getIntent().getStringExtra("option").equals("Call")) {
             setContentView(R.layout.activity_timer);
             callTimerDatabase = Room.databaseBuilder(getApplicationContext(),CallTimerDatabase.class,"CallTimerdb").allowMainThreadQueries().build();
@@ -45,20 +53,48 @@ public class TimerActivity extends AppCompatActivity {
             setContentView(R.layout.activity_message_timer);
             messageTimerDatabase = Room.databaseBuilder(getApplicationContext(), MessageTimerDatabase.class, "MessageTimerdb").allowMainThreadQueries().build();
         }
+
+        //fo date
+        editText = (EditText)findViewById(R.id.date);
+        Log.d("date", editText.getText().toString());
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
+        editText.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Log.d("click", "onClick");
+                // TODO Auto-generated method stub
+                new DatePickerDialog(TimerActivity.this, date, calendar
+                        .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
     }
 
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void settimer(View view) {
 
+        //calendar = Calendar.getInstance();
         //get time from time picker
         TimePicker tp = (TimePicker)findViewById(R.id.timePicker1);
         //tp.setIs24HourView(true);
+
+
         int startHour = tp.getHour();
         int startMinute = tp.getMinute();
         Log.d("Time is:",startHour+" "+startMinute);
 
-        Calendar calendar = Calendar.getInstance();
+
         calendar.set(Calendar.MILLISECOND,0);
         calendar.set(Calendar.SECOND,0);
         calendar.set(Calendar.MINUTE,startMinute);
@@ -127,16 +163,25 @@ public class TimerActivity extends AppCompatActivity {
         }
     }
 
-    protected void searchContact(){
+    //for date
+    private void updateLabel()
+    {
+        String myFormat = "dd/MM/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        editText.setText(sdf.format(calendar.getTime()));
+    }
+
+    protected void searchContact() {
         String name = getIntent().getStringExtra("Selected_name");
-        if(name == null){
+        if(name == null) {
             return;
         }
         ContactList contactList = (ContactList)getApplicationContext();
         ArrayList<Person> personArr = contactList.getPerson();
 
         Log.d("name is ",name);
-        for(int i = 0;i<personArr.size();i++){
+        for(int i = 0;i<personArr.size();i++) {
             if(name.toLowerCase().equals(personArr.get(i).getName().toLowerCase())){
                 number = personArr.get(i).getContact_no()[0];
                 Log.d("your selected name is",number);
