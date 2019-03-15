@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical">
 
-    <include android:id="@+id/toolbar"
-        layout="@layout/toolbar"
-        >
-    </include>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"></include>
 
     <EditText
         android:id="@+id/editText"
@@ -21,18 +19,18 @@
         android:layout_marginTop="60dp"
         android:hint="Search Contact" />
     <!--<android.support.design.widget.TabLayout-->
-        <!--android:id="@+id/tabs"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="?attr/colorPrimary"-->
-        <!--android:elevation="4dp"-->
-        <!--android:minHeight="?attr/actionBarSize"-->
-        <!--app:tabGravity="fill"-->
-        <!--app:tabMode="fixed"-->
-        <!--app:tabSelectedTextColor="@color/colorAccent"-->
-        <!--app:tabTextColor="#fff"-->
-        <!--tools:ignore="MissingConstraints">-->
-<!---->
+    <!--android:id="@+id/tabs"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="?attr/colorPrimary"-->
+    <!--android:elevation="4dp"-->
+    <!--android:minHeight="?attr/actionBarSize"-->
+    <!--app:tabGravity="fill"-->
+    <!--app:tabMode="fixed"-->
+    <!--app:tabSelectedTextColor="@color/colorAccent"-->
+    <!--app:tabTextColor="#fff"-->
+    <!--tools:ignore="MissingConstraints">-->
+    <!---->
     <!--</android.support.design.widget.TabLayout>-->
 
 
