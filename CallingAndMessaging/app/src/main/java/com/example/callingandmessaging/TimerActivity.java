@@ -165,6 +165,9 @@ public class TimerActivity extends AppCompatActivity {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
             Log.d("msg",messageText);
         }
+
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 
     //for date

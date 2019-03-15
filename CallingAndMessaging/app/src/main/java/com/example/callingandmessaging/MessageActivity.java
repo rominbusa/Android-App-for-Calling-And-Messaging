@@ -39,7 +39,7 @@ public class MessageActivity extends Activity {
                 return;
             }
         }
-        setContentView(R.layout.activity_timer);
+        //setContentView(R.layout.activity_timer);
         Log.d("messageText",getIntent().getStringExtra("messageText"));
 
         //searchContact();
@@ -59,6 +59,8 @@ public class MessageActivity extends Activity {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(number,null,msg,null,null);
         }
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     protected void requestSMSPermission(){
