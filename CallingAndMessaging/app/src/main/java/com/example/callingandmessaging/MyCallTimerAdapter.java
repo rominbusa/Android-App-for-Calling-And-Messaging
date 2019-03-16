@@ -39,9 +39,11 @@ public class MyCallTimerAdapter extends RecyclerView.Adapter<MyCallTimerAdapter.
     public void onBindViewHolder(@NonNull MyCallTimerViewHolder holder, int position) {
         holder.nameTextView.setText(callTimeTableList.get(position).getName());
         holder.numberTextView.setText(callTimeTableList.get(position).getNumber());
-        holder.timeTextView.setText(callTimeTableList.get(position).getDate()+ " "+callTimeTableList.get(position).getTime() );
-        //holder.idTextView.setText(callTimeTableList.get(position).getId());
-        //holder.imageView.
+        if(callTimeTableList.get(position).getDate()!=null) {
+            holder.timeTextView.setText(callTimeTableList.get(position).getDate() + " " + callTimeTableList.get(position).getTime());
+        }else {
+            holder.timeTextView.setText(callTimeTableList.get(position).getTime());
+        }
     }
 
     @Override

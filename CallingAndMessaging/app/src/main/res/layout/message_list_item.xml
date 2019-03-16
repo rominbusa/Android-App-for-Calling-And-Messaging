@@ -8,27 +8,45 @@
     app:cardCornerRadius="4dp"
     android:id="@+id/messageTimerCardView">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="162dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="5dp">
 
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="95dp"
+            android:layout_marginLeft="95dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:scaleType="centerCrop"
             android:textSize="15dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/number"
-            android:layout_width="289dp"
+            android:layout_width="299dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_below="@+id/name"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="95dp"
+            android:layout_marginLeft="95dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="51dp"
+            android:layout_marginRight="51dp"
             android:textSize="15dp"
             android:textStyle="bold" />
 
@@ -36,7 +54,16 @@
             android:id="@+id/time"
             android:layout_width="291dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_below="@+id/number"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="126dp"
+            android:layout_marginRight="126dp"
             android:textSize="15dp"
             android:textStyle="bold" />
 
@@ -44,10 +71,27 @@
             android:id="@+id/messageText"
             android:layout_width="291dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/time"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="6dp"
             android:textSize="15sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="64dp"
+            android:layout_height="49dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="9dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/ic_message_black_24dp" />
+    </RelativeLayout>
 
 
 
