@@ -13,6 +13,15 @@ public class MessageTimeTable {
     private String number;
     private String time;
     private String messageText;
+    private String date;
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
 
     public int getId() {
         return id;
