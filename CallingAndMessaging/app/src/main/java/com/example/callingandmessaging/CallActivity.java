@@ -3,6 +3,7 @@ package com.example.callingandmessaging;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -39,6 +40,10 @@ public class CallActivity extends Activity implements TextToSpeech.OnInitListene
         } else {
             requestCallPermission();
         }
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        Bundle b = getIntent().getExtras();
+        notificationManager.cancel(b.getInt("n_id"));
     }
 
     protected void makecall() {
@@ -51,6 +56,8 @@ public class CallActivity extends Activity implements TextToSpeech.OnInitListene
             }
             startActivity(callIntent);
         }
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 
