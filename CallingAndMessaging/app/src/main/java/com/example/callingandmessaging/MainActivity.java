@@ -24,6 +24,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements SeeMessageTimerFragment.OnFragmentInteractionListener, SeeCallTimerFragment.OnFragmentInteractionListener  {
 
     private int READ_CONTACT_CODE = 1;
@@ -47,7 +49,10 @@ public class MainActivity extends AppCompatActivity implements SeeMessageTimerFr
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
             //write code if you want to show any message like permission already granted
             ContactList contactList = (ContactList) getApplicationContext();
-            new Thread(contactList).start();
+            ArrayList<Person> personArrayList = contactList.getPerson();
+            if(personArrayList.isEmpty()) {
+                new Thread(contactList).start();
+            }
         } else {
             requestReadContactPermission();
         }
