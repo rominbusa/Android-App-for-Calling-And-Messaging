@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -23,6 +24,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements SeeMessageTimerFragment.OnFragmentInteractionListener, SeeCallTimerFragment.OnFragmentInteractionListener  {
 
@@ -47,7 +50,10 @@ public class MainActivity extends AppCompatActivity implements SeeMessageTimerFr
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
             //write code if you want to show any message like permission already granted
             ContactList contactList = (ContactList) getApplicationContext();
-            new Thread(contactList).start();
+            ArrayList<Person> personArrayList = contactList.getPerson();
+            if(personArrayList.isEmpty()) {
+                new Thread(contactList).start();
+            }
         } else {
             requestReadContactPermission();
         }
@@ -141,5 +147,25 @@ public class MainActivity extends AppCompatActivity implements SeeMessageTimerFr
     @Override
     public void onFragmentInteraction(Uri uri) {
         
+    }
+
+    private Boolean exit = false;
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            finish(); // finish activity
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
+
     }
 }

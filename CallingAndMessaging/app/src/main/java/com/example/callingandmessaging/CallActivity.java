@@ -55,9 +55,17 @@ public class CallActivity extends Activity implements TextToSpeech.OnInitListene
                 return;
             }
             startActivity(callIntent);
+
+
+        }else{
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
         }
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+
+
     }
 
 
@@ -135,5 +143,13 @@ public class CallActivity extends Activity implements TextToSpeech.OnInitListene
         }else{
             Toast.makeText(this,"sorry failsed due to some reason",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+
+        textToSpeech.shutdown();
     }
 }
