@@ -16,8 +16,11 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -39,7 +42,8 @@ public class TimerActivity extends AppCompatActivity {
     public static CallTimerDatabase callTimerDatabase;
     public static MessageTimerDatabase messageTimerDatabase;
     Calendar calendar;
-    EditText editText;
+    EditText editText,messageEditText;
+    Button sendMessagebtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,29 @@ public class TimerActivity extends AppCompatActivity {
         }
         else {
             setContentView(R.layout.activity_message_timer);
+            sendMessagebtn = findViewById(R.id.button3);
+            sendMessagebtn.setEnabled(false);
+            messageEditText = findViewById(R.id.editText);
+            messageEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if(s.toString().trim().length()==0){
+                        sendMessagebtn.setEnabled(false);
+                    }else{
+                        sendMessagebtn.setEnabled(true);
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
             messageTimerDatabase = Room.databaseBuilder(getApplicationContext(), MessageTimerDatabase.class, "MessageTimerdb").allowMainThreadQueries().build();
         }
 
@@ -140,9 +167,10 @@ public class TimerActivity extends AppCompatActivity {
 
         //for message
         else {
-            EditText messageEditText = findViewById(R.id.editText);
+//            messageEditText = findViewById(R.id.editText);
             String messageText = messageEditText.getText().toString();
             int m = (int) System.currentTimeMillis() % 50000;
+
 
             MessageTimeTable messageTimeTable = new MessageTimeTable();
             messageTimeTable.setId(m);
@@ -173,6 +201,8 @@ public class TimerActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+
     //for date
     private void updateLabel()
     {
@@ -199,4 +229,7 @@ public class TimerActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
 }

@@ -67,7 +67,7 @@ public class CallActivity extends Activity implements TextToSpeech.OnInitListene
 
 
     }
-    
+
 
     protected void requestCallPermission(){
         if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.CALL_PHONE)){
