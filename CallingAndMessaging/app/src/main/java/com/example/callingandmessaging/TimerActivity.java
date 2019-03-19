@@ -84,6 +84,12 @@ public class TimerActivity extends AppCompatActivity {
 
         //fo date
         editText = (EditText)findViewById(R.id.date);
+        Log.d("edittext value is ",editText.getText().toString());
+        if(editText.getText()!=null){
+            Log.d("gjhgjhgjh",editText.getText().toString());
+            Date c = Calendar.getInstance().getTime();
+            Log.d("Current time => " , c.toString());
+        }
         Log.d("date", editText.getText().toString());
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -92,9 +98,10 @@ public class TimerActivity extends AppCompatActivity {
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel();
-                dateStr = String.valueOf(dayOfMonth) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
+                dateStr = String.valueOf(dayOfMonth) + "/" + String.valueOf(month+1) + "/" + String.valueOf(year);
             }
         };
+
         editText.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -155,6 +162,7 @@ public class TimerActivity extends AppCompatActivity {
             callTimeTable.setName(getIntent().getStringExtra("Selected_name"));
             callTimeTable.setTime(format.format(calendar.getTime()).toString());
             callTimeTable.setNumber(number);
+            Log.d("time and date is ",dateStr);
             callTimeTable.setDate(dateStr);
             TimerActivity.callTimerDatabase.callDao().addTimer(callTimeTable);
 
