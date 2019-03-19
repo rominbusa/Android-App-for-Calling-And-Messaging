@@ -84,13 +84,10 @@ public class TimerActivity extends AppCompatActivity {
 
         //fo date
         editText = (EditText)findViewById(R.id.date);
-        Log.d("edittext value is ",editText.getText().toString());
-        if(editText.getText()!=null){
-            Log.d("gjhgjhgjh",editText.getText().toString());
-            Date c = Calendar.getInstance().getTime();
-            Log.d("Current time => " , c.toString());
-        }
-        Log.d("date", editText.getText().toString());
+        //set default current date
+        updateLabel();
+        Log.d("dateStr", dateStr);
+
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -98,7 +95,9 @@ public class TimerActivity extends AppCompatActivity {
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel();
-                dateStr = String.valueOf(dayOfMonth) + "/" + String.valueOf(month+1) + "/" + String.valueOf(year);
+<<<<<<< HEAD
+=======
+>>>>>>> ed569c0ef8c2e317eafb1c81103f4c311b4d3c1a
             }
         };
 
@@ -120,23 +119,17 @@ public class TimerActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void settimer(View view) {
 
-        //calendar = Calendar.getInstance();
         //get time from time picker
         TimePicker tp = (TimePicker)findViewById(R.id.timePicker1);
-        //tp.setIs24HourView(true);
-
 
         int startHour = tp.getHour();
         int startMinute = tp.getMinute();
         Log.d("Time is:",startHour+" "+startMinute);
 
-
         calendar.set(Calendar.MILLISECOND,0);
         calendar.set(Calendar.SECOND,0);
         calendar.set(Calendar.MINUTE,startMinute);
         calendar.set(Calendar.HOUR_OF_DAY,startHour);
-
-
 
         searchContact();
 
@@ -153,9 +146,6 @@ public class TimerActivity extends AppCompatActivity {
             int m = (int) System.currentTimeMillis() % 50000;
             Log.d("m:", String.valueOf(m));
             intent.putExtra("id", m);
-//             intent.putExtra("requestCode", m);
-
-
 
             CallTimeTable callTimeTable = new CallTimeTable();
             callTimeTable.setId(m);
@@ -178,7 +168,6 @@ public class TimerActivity extends AppCompatActivity {
 //            messageEditText = findViewById(R.id.editText);
             String messageText = messageEditText.getText().toString();
             int m = (int) System.currentTimeMillis() % 50000;
-
 
             MessageTimeTable messageTimeTable = new MessageTimeTable();
             messageTimeTable.setId(m);
@@ -214,9 +203,9 @@ public class TimerActivity extends AppCompatActivity {
     //for date
     private void updateLabel()
     {
-        String myFormat = "dd/MM/yy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
+        dateStr = sdf.format(calendar.getTime());
         editText.setText(sdf.format(calendar.getTime()));
     }
 
