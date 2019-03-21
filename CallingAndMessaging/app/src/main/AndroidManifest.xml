@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
         <!--<activity android:name=".ContactListActivity" />-->
         <activity android:name=".TimerActivity" />
-        <activity android:name=".MessageActivity"></activity>
+
         <activity android:name=".DisplayCallTimers"></activity>
         <activity android:name=".TakeMessageTextActivity"/>
         <activity android:name=".AudioRecorder"></activity>
@@ -33,6 +33,7 @@
             </intent-filter>
         </activity>
         <receiver android:name=".MyReceiver"></receiver>
+        <receiver android:name=".MessageActivity"></receiver>
         <receiver android:name=".ClearNotification"></receiver>
     </application>
 

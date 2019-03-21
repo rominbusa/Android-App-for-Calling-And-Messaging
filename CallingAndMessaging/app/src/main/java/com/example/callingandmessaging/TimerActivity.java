@@ -95,9 +95,6 @@ public class TimerActivity extends AppCompatActivity {
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel();
-<<<<<<< HEAD
-=======
->>>>>>> ed569c0ef8c2e317eafb1c81103f4c311b4d3c1a
             }
         };
 
@@ -155,7 +152,7 @@ public class TimerActivity extends AppCompatActivity {
             Log.d("time and date is ",dateStr);
             callTimeTable.setDate(dateStr);
             TimerActivity.callTimerDatabase.callDao().addTimer(callTimeTable);
-
+            callTimerDatabase.close();
             Toast.makeText(this,"updated",Toast.LENGTH_SHORT).show();
 
             pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), m, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -177,6 +174,7 @@ public class TimerActivity extends AppCompatActivity {
             messageTimeTable.setMessageText(messageText);
             messageTimeTable.setDate(dateStr);
             TimerActivity.messageTimerDatabase.messageDao().addTimer(messageTimeTable);
+            messageTimerDatabase.close();
             Toast.makeText(this, "Message Timer Added", Toast.LENGTH_SHORT).show();
 
             Intent intent1 = new Intent(this,MessageActivity.class);
@@ -186,7 +184,7 @@ public class TimerActivity extends AppCompatActivity {
             intent1.putExtra("number", number);
             intent1.putExtra("messageText",messageText);
 
-            pendingIntent = PendingIntent.getActivity(this.getApplicationContext(), m, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+            pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), m, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
             Log.d("msg",messageText);
         }
