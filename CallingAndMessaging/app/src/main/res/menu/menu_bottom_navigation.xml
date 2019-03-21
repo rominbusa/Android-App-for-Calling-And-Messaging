@@ -10,20 +10,20 @@
     <item
         android:id="@+id/callByTimer"
         android:enabled="true"
-        android:icon="@drawable/ic_schedule_black_24dp"
+        android:icon="@drawable/call_by_timer"
         android:title="@string/callByTimer"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/messageByTimer"
         android:enabled="true"
-        android:icon="@drawable/ic_schedule_black_24dp"
+        android:icon="@drawable/ic_message"
         android:title="@string/messageByTimer"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/userGuide"
         android:enabled="true"
-        android:icon="@drawable/ic_account_box_black_24dp"
+        android:icon="@drawable/ic_manual"
         android:title="@string/userGuide"
         app:showAsAction="ifRoom" />
 </menu>
