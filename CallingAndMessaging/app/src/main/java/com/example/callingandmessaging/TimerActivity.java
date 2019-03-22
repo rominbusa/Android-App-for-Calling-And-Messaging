@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -110,6 +111,8 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
 
+        TextView t = findViewById(R.id.title);
+        t.append(getIntent().getStringExtra("Selected_name"));
     }
 
     @TargetApi(Build.VERSION_CODES.M)
