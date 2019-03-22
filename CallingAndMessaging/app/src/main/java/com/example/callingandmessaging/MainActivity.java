@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements SeeMessageTimerFr
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private TabLayout tabLayout;
+    private int SEND_MESSAGE_CODE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,11 +101,21 @@ public class MainActivity extends AppCompatActivity implements SeeMessageTimerFr
     }
 
     public void setTimerByMessage(View view) {
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
+            //write code if you want to show any message like permission already granted
+            showContactMessageTimer();
+        }else{
+            requestSMSPermission();
+        }
+
+    }
+
+    public void showContactMessageTimer(){
         Intent intent= new Intent(MainActivity.this,DisplayContactListActivity.class);
         intent.putExtra("option","Message");
         startActivity(intent);
     }
-
     public void getVoice(View view) {
         Intent intent = new Intent(MainActivity.this,AudioRecorder.class);
         startActivity(intent);
@@ -142,6 +153,14 @@ public class MainActivity extends AppCompatActivity implements SeeMessageTimerFr
                 Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
             }
         }
+
+        if(requestCode == SEND_MESSAGE_CODE){
+            if(grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                showContactMessageTimer();
+            }else{
+                Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -168,4 +187,29 @@ public class MainActivity extends AppCompatActivity implements SeeMessageTimerFr
         }
 
     }
+
+    protected void requestSMSPermission(){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.SEND_SMS)){
+            new AlertDialog.Builder(this)
+                    .setTitle("permission is needed to Send sms")
+                    .setMessage("To Send SMS and some funtionalities might not work properly")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.SEND_SMS},SEND_MESSAGE_CODE);
+                        }
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).create().show();
+        }else{
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},SEND_MESSAGE_CODE);
+        }
+    }
+
+
+
 }

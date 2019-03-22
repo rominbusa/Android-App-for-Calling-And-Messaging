@@ -84,7 +84,6 @@ public class TimerActivity extends AppCompatActivity {
 
         //fo date
         editText = (EditText)findViewById(R.id.date);
-        Log.d("date", editText.getText().toString());
         //set default current date
         updateLabel();
         Log.d("dateStr", dateStr);
@@ -98,6 +97,7 @@ public class TimerActivity extends AppCompatActivity {
                 updateLabel();
             }
         };
+
         editText.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -149,9 +149,10 @@ public class TimerActivity extends AppCompatActivity {
             callTimeTable.setName(getIntent().getStringExtra("Selected_name"));
             callTimeTable.setTime(format.format(calendar.getTime()).toString());
             callTimeTable.setNumber(number);
+            Log.d("time and date is ",dateStr);
             callTimeTable.setDate(dateStr);
             TimerActivity.callTimerDatabase.callDao().addTimer(callTimeTable);
-
+            callTimerDatabase.close();
             Toast.makeText(this,"updated",Toast.LENGTH_SHORT).show();
 
             pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), m, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -173,6 +174,7 @@ public class TimerActivity extends AppCompatActivity {
             messageTimeTable.setMessageText(messageText);
             messageTimeTable.setDate(dateStr);
             TimerActivity.messageTimerDatabase.messageDao().addTimer(messageTimeTable);
+            messageTimerDatabase.close();
             Toast.makeText(this, "Message Timer Added", Toast.LENGTH_SHORT).show();
 
             Intent intent1 = new Intent(this,MessageActivity.class);
@@ -182,7 +184,7 @@ public class TimerActivity extends AppCompatActivity {
             intent1.putExtra("number", number);
             intent1.putExtra("messageText",messageText);
 
-            pendingIntent = PendingIntent.getActivity(this.getApplicationContext(), m, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+            pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), m, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
             Log.d("msg",messageText);
         }

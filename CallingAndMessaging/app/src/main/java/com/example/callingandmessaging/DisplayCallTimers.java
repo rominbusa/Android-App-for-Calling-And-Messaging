@@ -30,7 +30,7 @@ public class DisplayCallTimers extends Activity {
         callTimerDatabase = Room.databaseBuilder(getApplicationContext(),CallTimerDatabase.class,"CallTimerdb").allowMainThreadQueries().build();
 
         final List<CallTimeTable> callTimeTables = DisplayCallTimers.callTimerDatabase.callDao().gerCallTimers();
-
+        callTimerDatabase.close();
         //for recyclerview
         recyclerView = (RecyclerView) findViewById(R.id.callTimerRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -46,10 +46,11 @@ public class DisplayCallTimers extends Activity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                callTimerDatabase = Room.databaseBuilder(getApplicationContext(),CallTimerDatabase.class,"CallTimerdb").allowMainThreadQueries().build();
                 DisplayCallTimers.callTimerDatabase.callDao().deleteTimer(mAdapter.getCallTimerAt(viewHolder.getAdapterPosition()));
                 callTimeTables.remove(mAdapter.getCallTimerAt(viewHolder.getAdapterPosition()));
                 mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-
+                callTimerDatabase.close();
                 Toast.makeText(getApplicationContext(), "swiped", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);

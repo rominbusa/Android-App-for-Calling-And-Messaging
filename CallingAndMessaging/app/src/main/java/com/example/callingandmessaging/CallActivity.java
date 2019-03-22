@@ -107,9 +107,9 @@ public class CallActivity extends Activity implements TextToSpeech.OnInitListene
         if(status == TextToSpeech.SUCCESS){
             int languageStatus = textToSpeech.setLanguage(Locale.ENGLISH);
             if(languageStatus == TextToSpeech.LANG_MISSING_DATA || languageStatus == TextToSpeech.LANG_NOT_SUPPORTED){
-                Toast.makeText(this,"sorry failsed due to Lang no supproted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"sorry failed due to Language no supproted",Toast.LENGTH_SHORT).show();
             }else{
-                String data = "Calling to  "+getIntent().getStringExtra("number");
+                String data = "Calling to  "+getIntent().getStringExtra("name");
                 int stext = 0;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                     stext = textToSpeech.speak(data, TextToSpeech.QUEUE_FLUSH,null,"uttid");
