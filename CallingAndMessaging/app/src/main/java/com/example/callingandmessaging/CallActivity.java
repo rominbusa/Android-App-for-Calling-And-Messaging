@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.telecom.Call;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,10 +30,15 @@ public class CallActivity extends Activity implements TextToSpeech.OnInitListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_call);
 //        Log.d("asda","asa");
 
 
         number = getIntent().getStringExtra("number");
+
+        TextView callingToNumber = findViewById(R.id.callingToNumber);
+        callingToNumber.append(number);
+
         //searchContact();
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED){
             //write code if you want to show any message like permission already granted
@@ -77,7 +83,7 @@ public class CallActivity extends Activity implements TextToSpeech.OnInitListene
         if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.CALL_PHONE)){
             new AlertDialog.Builder(this)
                     .setTitle("permission is needed to Call")
-                    .setMessage("Call funtionality might not work properly")
+                    .setMessage("Call functionality might not work properly")
                     .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
