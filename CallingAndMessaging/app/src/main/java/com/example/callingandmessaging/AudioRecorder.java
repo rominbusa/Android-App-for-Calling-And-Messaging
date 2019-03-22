@@ -29,7 +29,7 @@ public class AudioRecorder extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        record_audio();
+
     }
 
     //record audio by google api
@@ -110,5 +110,11 @@ public class AudioRecorder extends Activity {
             }
         }
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        record_audio();
     }
 }
