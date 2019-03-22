@@ -16,16 +16,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!--<activity android:name=".ContactListActivity" />-->
-        <activity android:name=".TimerActivity" />
+        <activity android:name=".TimerActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".DisplayCallTimers"></activity>
-        <activity android:name=".TakeMessageTextActivity"/>
-        <activity android:name=".AudioRecorder"></activity>
-        <activity android:name=".NotificationReceiver"></activity>
-        <activity android:name=".CallActivity"></activity>
-        <activity android:name=".DisplayContactListActivity"></activity>
-        <activity android:name=".DisplayMessageTimers"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".DisplayCallTimers"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".TakeMessageTextActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AudioRecorder"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".NotificationReceiver"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".CallActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".DisplayContactListActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".DisplayMessageTimers"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -22,7 +22,7 @@ import java.util.Locale;
 import static android.app.Activity.RESULT_OK;
 
 public class AudioRecorder extends Activity {
-    String text_of_audio, audioStr, number, msg, name;
+    String text_of_audio=null, audioStr=null, number=null, msg, name=null;
 
     BuildURL URLBuilder = new BuildURL();
 
@@ -62,8 +62,13 @@ public class AudioRecorder extends Activity {
                         name = audioStr;
                         searchContact();
                         Intent intent = new Intent(this, CallActivity.class);
+                        intent.putExtra("name",name);
                         intent.putExtra("number", number);
-                        startActivity(intent);
+                        if(number != null) {
+                            startActivity(intent);
+                        }else {
+                            record_audio();
+                        }
                     } else if (audioStr.contains("message")) {
                         audioStr = audioStr.substring(7);
                         Log.d("name", audioStr);
@@ -71,7 +76,14 @@ public class AudioRecorder extends Activity {
                         searchContact();
                         Intent intent = new Intent(this, TakeMessageTextActivity.class);
                         intent.putExtra("number", number);
-                        startActivity(intent);
+                        intent.putExtra("name",name);
+                        if(number != null) {
+                            startActivity(intent);
+                        }else {
+                            record_audio();
+                        }
+                    }else{
+                        record_audio();
                     }
                     Log.d("audio", audioStr);
                 }
@@ -81,10 +93,9 @@ public class AudioRecorder extends Activity {
     }
 
     protected void searchContact() {
-        //String name = getIntent().getStringExtra("Selected_name");
-       // msg = getIntent().getStringExtra("messageText");
         if (name == null) {
             return;
+
         }
         ContactList contactList = (ContactList) getApplicationContext();
         ArrayList<Person> personArr = contactList.getPerson();
@@ -98,5 +109,6 @@ public class AudioRecorder extends Activity {
                 break;
             }
         }
+
     }
 }

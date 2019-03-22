@@ -33,6 +33,7 @@ public class TakeMessageTextActivity extends Activity implements TextToSpeech.On
     }
 
     public void record_audio(){
+        textToSpeech.shutdown();
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
@@ -80,7 +81,7 @@ public class TakeMessageTextActivity extends Activity implements TextToSpeech.On
             if(languageStatus == TextToSpeech.LANG_MISSING_DATA || languageStatus == TextToSpeech.LANG_NOT_SUPPORTED){
                 Toast.makeText(this,"sorry failsed due to Lang no supproted",Toast.LENGTH_SHORT).show();
             }else{
-                String data = "speak message to "+getIntent().getStringExtra("number");
+                String data = "speak message to "+getIntent().getStringExtra("name");
                 int stext = 0;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                     stext = textToSpeech.speak(data, TextToSpeech.QUEUE_FLUSH,null,"uttid");

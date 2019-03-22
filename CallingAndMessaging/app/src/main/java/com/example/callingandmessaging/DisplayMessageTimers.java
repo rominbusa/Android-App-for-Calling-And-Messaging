@@ -25,7 +25,7 @@ public class DisplayMessageTimers extends Activity {
 
         messageTimerDatabase = Room.databaseBuilder(getApplicationContext(), MessageTimerDatabase.class, "MessageTimerdb").allowMainThreadQueries().build();
         final List<MessageTimeTable> messageTimeTables = DisplayMessageTimers.messageTimerDatabase.messageDao().getAllTimers();
-
+        messageTimerDatabase.close();
         //for recyclerview
         recyclerView = (RecyclerView) findViewById(R.id.messageTimerRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -41,10 +41,11 @@ public class DisplayMessageTimers extends Activity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                messageTimerDatabase = Room.databaseBuilder(getApplicationContext(), MessageTimerDatabase.class, "MessageTimerdb").allowMainThreadQueries().build();
                 DisplayMessageTimers.messageTimerDatabase.messageDao().deleteTimer(mAdapter.getMessageAt(viewHolder.getAdapterPosition()));
                 messageTimeTables.remove(mAdapter.getMessageAt(viewHolder.getAdapterPosition()));
                 mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-
+                messageTimerDatabase.close();
                 Toast.makeText(getApplicationContext(),"Message item Removed by swipe",Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);

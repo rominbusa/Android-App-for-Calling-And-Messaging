@@ -23,7 +23,7 @@ import java.util.List;
  * Activities that contain this fragment must implement the
  * {@link SeeCallTimerFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SeeCallTimerFragment#newInstance} factory method to
+ * Use the {@link SeeCallTimerFragment#} factory method to
  * create an instance of this fragment.
  */
 public class SeeCallTimerFragment extends Fragment {
@@ -65,7 +65,7 @@ public class SeeCallTimerFragment extends Fragment {
             callTimerDatabase = Room.databaseBuilder(getActivity(), CallTimerDatabase.class, "CallTimerdb").allowMainThreadQueries().build();
         } catch (NullPointerException e) { Log.d("Exception:" , e.toString());}
         final List<CallTimeTable> callTimeTables = SeeCallTimerFragment.callTimerDatabase.callDao().gerCallTimers();
-
+        callTimerDatabase.close();
         //for recyclerview
         recyclerView = (RecyclerView) view.findViewById(R.id.callTimerRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -81,10 +81,11 @@ public class SeeCallTimerFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                callTimerDatabase = Room.databaseBuilder(getActivity(), CallTimerDatabase.class, "CallTimerdb").allowMainThreadQueries().build();
                 SeeCallTimerFragment.callTimerDatabase.callDao().deleteTimer(mAdapter.getCallTimerAt(viewHolder.getAdapterPosition()));
                 callTimeTables.remove(mAdapter.getCallTimerAt(viewHolder.getAdapterPosition()));
                 mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-
+                callTimerDatabase.close();
                 Toast.makeText(getActivity(), "swiped", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);

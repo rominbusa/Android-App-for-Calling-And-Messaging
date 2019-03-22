@@ -22,7 +22,7 @@ import java.util.List;
  * Activities that contain this fragment must implement the
  * {@link SeeMessageTimerFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SeeMessageTimerFragment#newInstance} factory method to
+ * Use the {@link SeeMessageTimerFragment#} factory method to
  * create an instance of this fragment.
  */
 public class SeeMessageTimerFragment extends Fragment {
@@ -61,7 +61,7 @@ public class SeeMessageTimerFragment extends Fragment {
         View view = inflater.inflate(R.layout.display_message_timer, container, false);
         messageTimerDatabase = Room.databaseBuilder(getActivity(), MessageTimerDatabase.class, "MessageTimerdb").allowMainThreadQueries().build();
         final List<MessageTimeTable> messageTimeTables = SeeMessageTimerFragment.messageTimerDatabase.messageDao().getAllTimers();
-
+        messageTimerDatabase.close();
         //for recyclerview
         recyclerView = (RecyclerView) view.findViewById(R.id.messageTimerRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -77,10 +77,11 @@ public class SeeMessageTimerFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                messageTimerDatabase = Room.databaseBuilder(getActivity(), MessageTimerDatabase.class, "MessageTimerdb").allowMainThreadQueries().build();
                 SeeMessageTimerFragment.messageTimerDatabase.messageDao().deleteTimer(mAdapter.getMessageAt(viewHolder.getAdapterPosition()));
                 messageTimeTables.remove(mAdapter.getMessageAt(viewHolder.getAdapterPosition()));
                 mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-
+                messageTimerDatabase.close();
                 Toast.makeText(getActivity(),"Message item Removed by swipe",Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
