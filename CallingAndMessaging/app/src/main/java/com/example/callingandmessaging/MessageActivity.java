@@ -43,7 +43,7 @@ public class MessageActivity extends BroadcastReceiver {
             messageTimeTable = this.messageTimerDatabase.messageDao().getMessageTimerById(intent.getIntExtra("id",-1));
             if(messageTimeTable == null)
             {
-                Toast.makeText(context, "message timer is deleted", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "message timer was Deleted", Toast.LENGTH_SHORT).show();
                 return;
             }
 

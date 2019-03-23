@@ -46,7 +46,7 @@ public class DisplayMessageTimers extends Activity {
                 messageTimeTables.remove(mAdapter.getMessageAt(viewHolder.getAdapterPosition()));
                 mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
                 messageTimerDatabase.close();
-                Toast.makeText(getApplicationContext(),"Message item Removed by swipe",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Message Deleted",Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(mAdapter);

@@ -136,7 +136,7 @@ public class TimerActivity extends AppCompatActivity {
         alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
         SimpleDateFormat format = new SimpleDateFormat("h:mm a");
-        Toast.makeText(this,format.format(calendar.getTime()),Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,format.format(calendar.getTime()),Toast.LENGTH_SHORT).show();
 
         if(getIntent().getStringExtra("option").equals("Call")) {
             Intent intent = new Intent(this, MyReceiver.class);
@@ -156,7 +156,7 @@ public class TimerActivity extends AppCompatActivity {
             callTimeTable.setDate(dateStr);
             TimerActivity.callTimerDatabase.callDao().addTimer(callTimeTable);
             callTimerDatabase.close();
-            Toast.makeText(this,"updated",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"call Timer added",Toast.LENGTH_SHORT).show();
 
             pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), m, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 

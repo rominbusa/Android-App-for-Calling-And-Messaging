@@ -55,7 +55,7 @@ public class DisplayContactListActivity extends Activity {
             @Override
             public void onItemClick(int position) {
                 String selected_name = arr.get(position).getName();
-                Toast.makeText(DisplayContactListActivity.this, "You selected " + selected_name, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(DisplayContactListActivity.this, "You selected " + selected_name, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(DisplayContactListActivity.this, TimerActivity.class);
                 intent.putExtra("Selected_name", selected_name);
                 intent.putExtra("option", getIntent().getStringExtra("option"));
@@ -87,7 +87,7 @@ public class DisplayContactListActivity extends Activity {
                     @Override
                     public void onItemClick(int position) {
                         String selected_name = result.get(position).getName();
-                        Toast.makeText(DisplayContactListActivity.this, "You selected " + selected_name, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(DisplayContactListActivity.this, "You selected " + selected_name, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(DisplayContactListActivity.this, TimerActivity.class);
                         intent.putExtra("Selected_name", selected_name);
                         intent.putExtra("option", getIntent().getStringExtra("option"));

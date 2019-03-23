@@ -19,7 +19,7 @@ public class MyReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         Log.d("works","success it works\n");
-        Toast.makeText(context,"ALARM",Toast.LENGTH_LONG).show();
+//        Toast.makeText(context,"ALARM",Toast.LENGTH_LONG).show();
 
         callTimerDatabase = Room.databaseBuilder(context.getApplicationContext(),CallTimerDatabase.class,"CallTimerdb").allowMainThreadQueries().build();
 
@@ -29,7 +29,7 @@ public class MyReceiver extends BroadcastReceiver {
 
         if(callTimeTable == null)
         {
-            Toast.makeText(context, "it is deleted", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "it was Deleted", Toast.LENGTH_SHORT).show();
             return;
         }
 

@@ -34,6 +34,9 @@
             ></activity>
         <activity android:name=".DisplayMessageTimers"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".userManual"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>

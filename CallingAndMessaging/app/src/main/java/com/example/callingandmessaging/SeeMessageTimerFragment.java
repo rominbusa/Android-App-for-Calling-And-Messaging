@@ -82,7 +82,7 @@ public class SeeMessageTimerFragment extends Fragment {
                 messageTimeTables.remove(mAdapter.getMessageAt(viewHolder.getAdapterPosition()));
                 mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
                 messageTimerDatabase.close();
-                Toast.makeText(getActivity(),"Message item Removed by swipe",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Message is Deleted",Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(mAdapter);

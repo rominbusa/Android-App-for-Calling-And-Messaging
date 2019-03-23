@@ -104,7 +104,7 @@ public class ContactList extends Application implements Runnable {
                 mainHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getApplicationContext(),"contact fetched",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(),"contact fetched",Toast.LENGTH_SHORT).show();
                     Log.d("fetched ","contact dectshded");
                 }
             });
