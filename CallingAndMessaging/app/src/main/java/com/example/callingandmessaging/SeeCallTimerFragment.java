@@ -86,7 +86,7 @@ public class SeeCallTimerFragment extends Fragment {
                 callTimeTables.remove(mAdapter.getCallTimerAt(viewHolder.getAdapterPosition()));
                 mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
                 callTimerDatabase.close();
-                Toast.makeText(getActivity(), "swiped", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "swiped", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 

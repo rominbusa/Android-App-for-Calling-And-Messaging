@@ -51,7 +51,7 @@ public class DisplayCallTimers extends Activity {
                 callTimeTables.remove(mAdapter.getCallTimerAt(viewHolder.getAdapterPosition()));
                 mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
                 callTimerDatabase.close();
-                Toast.makeText(getApplicationContext(), "swiped", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "call Timer Deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 

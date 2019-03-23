@@ -82,7 +82,7 @@ public class TakeMessageTextActivity extends Activity implements TextToSpeech.On
         if(status == TextToSpeech.SUCCESS){
             int languageStatus = textToSpeech.setLanguage(Locale.ENGLISH);
             if(languageStatus == TextToSpeech.LANG_MISSING_DATA || languageStatus == TextToSpeech.LANG_NOT_SUPPORTED){
-                Toast.makeText(this,"sorry failsed due to Lang no supproted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"sorry failed due to Lang no supproted",Toast.LENGTH_SHORT).show();
             }else{
                 String data = "speak message to "+getIntent().getStringExtra("name");
                 int stext = 0;

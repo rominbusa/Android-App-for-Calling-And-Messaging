@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:text="User Guide"
+                android:textStyle="bold"
+                android:textColor="@color/darkBlack"
+                android:textSize="40dp"/>
+
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="739dp"
+                android:scaleType="fitStart"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/homepage"
+                tools:layout_editor_absoluteX="52dp"
+                tools:layout_editor_absoluteY="86dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:text="fig_homepage"
+                android:textColor="@color/darkBlack"
+                android:textSize="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:text=" Homepage"
+                android:textStyle="bold"
+                android:textColor="@color/darkBlack"
+                android:textSize="30dp"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="Here in above fig :"
+                android:textColor="@color/darkBlack"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="1) Calling and Messaging by Voice"
+                android:textColor="@color/darkBlack"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="2) Call by Setting Timer"
+                android:textColor="@color/darkBlack"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="3) Message by Setting Timer"
+                android:textColor="@color/darkBlack"
+                android:textSize="20dp"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:text="1) Calling and Messaging by Voice"
+                android:textColor="@color/darkBlack"
+                android:textSize="30dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="say 'call Xyz' to call Xyz and 'message Xyz' to message Xyz"
+                android:textColor="@color/darkBlack"
+                android:textSize="20dp"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:text="2) Call by Setting Timer"
+                android:textColor="@color/darkBlack"
+                android:textSize="30dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="Select contact to which you want to set timer for call"
+                android:textColor="@color/darkBlack"
+                android:textSize="20dp"/>
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="match_parent"
+                android:layout_height="739dp"
+                android:scaleType="fitStart"
+                android:layout_marginTop="30dp"
+
+                android:src="@drawable/contactlist" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:text="fig_ContactList"
+                android:textColor="@color/darkBlack"
+                android:textSize="10dp"/>
+
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="match_parent"
+                android:layout_height="739dp"
+                android:scaleType="fitStart"
+                android:layout_marginTop="30dp"
+
+                android:src="@drawable/setcalltimer" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/darkBlack"
+                android:text="Set Date and Time you want to call"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:text="3) Message by Setting Timer"
+                android:textColor="@color/darkBlack"
+                android:textSize="30dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="Select contact to which you want to set timer for message"
+                android:textColor="@color/darkBlack"
+                android:textSize="20dp"/>
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="match_parent"
+                android:layout_height="739dp"
+                android:scaleType="fitStart"
+                android:layout_marginTop="30dp"
+
+                android:src="@drawable/contactlist" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:text="fig_ContactList"
+                android:textColor="@color/darkBlack"
+                android:textSize="10dp"/>
+
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="match_parent"
+                android:layout_height="739dp"
+                android:scaleType="fitStart"
+                android:layout_marginTop="30dp"
+
+                android:src="@drawable/setmessagetimer" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/darkBlack"
+                android:layout_marginBottom="20dp"
+                android:text="Set Message Timer by Selecting Date,Time and Enter the Message"
+                android:textSize="20dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>
