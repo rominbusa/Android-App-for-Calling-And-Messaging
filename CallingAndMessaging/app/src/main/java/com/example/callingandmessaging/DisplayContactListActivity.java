@@ -133,7 +133,7 @@ public class DisplayContactListActivity extends Activity {
             result.clear();
         }
         for (Person p : arr ) {
-           if (p != null && p.getName().toLowerCase().contains(s) ){
+           if (p != null && p.getName().toLowerCase().contains(s.toLowerCase()) ){
                Log.d("names",p.getName());
                result.add(p);
            }

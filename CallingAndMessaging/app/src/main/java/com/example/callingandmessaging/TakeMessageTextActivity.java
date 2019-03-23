@@ -33,7 +33,7 @@ public class TakeMessageTextActivity extends Activity implements TextToSpeech.On
     }
 
     public void record_audio(){
-        textToSpeech.shutdown();
+//        textToSpeech.shutdown();
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
@@ -150,5 +150,11 @@ public class TakeMessageTextActivity extends Activity implements TextToSpeech.On
                 Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        textToSpeech.shutdown();
     }
 }

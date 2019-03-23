@@ -36,7 +36,11 @@ public class CallActivity extends Activity implements TextToSpeech.OnInitListene
         //searchContact();
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED){
             //write code if you want to show any message like permission already granted
-            textToSpeech = new TextToSpeech(this,this);
+            if(getIntent().getStringExtra("name")!=null) {
+                textToSpeech = new TextToSpeech(this, this);
+            }else {
+                makecall();
+            }
         } else {
             requestCallPermission();
         }
@@ -95,7 +99,11 @@ public class CallActivity extends Activity implements TextToSpeech.OnInitListene
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if(requestCode == CALL_CODE) {
             if(grantResults.length>0  && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                textToSpeech = new TextToSpeech(this,this);
+                if(getIntent().getStringExtra("name")!=null) {
+                    textToSpeech = new TextToSpeech(this, this);
+                }else {
+                    makecall();
+                }
             } else {
                 Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
             }
@@ -130,6 +138,7 @@ public class CallActivity extends Activity implements TextToSpeech.OnInitListene
 
                 @Override
                 public void onDone(String utteranceId) {
+
                     makecall();
                 }
 
@@ -161,6 +170,8 @@ public class CallActivity extends Activity implements TextToSpeech.OnInitListene
     {
         super.onDestroy();
 
-        textToSpeech.shutdown();
+        if(getIntent().getStringExtra("name")!=null) {
+            textToSpeech.shutdown();
+        }
     }
 }
