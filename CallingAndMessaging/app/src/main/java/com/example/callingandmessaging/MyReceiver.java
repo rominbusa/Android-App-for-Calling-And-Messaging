@@ -6,6 +6,9 @@ import android.arch.persistence.room.Room;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
@@ -51,8 +54,13 @@ public class MyReceiver extends BroadcastReceiver {
         clearIntent.putExtra("n_id",notification_id);
         PendingIntent clearPendingIntent = PendingIntent.getBroadcast(context,notification_id,clearIntent,PendingIntent.FLAG_ONE_SHOT);
 
+        //for notification sound
+        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
         builder.setContentIntent(pendingIntent);
-        builder.setSmallIcon(R.drawable.ic_launcher_background);
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher));
+        builder.setSound(uri);
         builder.setContentTitle("Call " + intent.getStringExtra("Selected_name"));
         builder.setContentText("Do you want to call?");
         builder.addAction(R.color.colorAccent,"MAKE CALL",pendingIntent);
