@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,9 +28,11 @@ public class TakeMessageTextActivity extends Activity implements TextToSpeech.On
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_take_message_text);
         textToSpeech = new TextToSpeech(this,this);
-//        record_audio();
+        TextView messageToNumber = findViewById(R.id.messageToNumber);
+        messageToNumber.append(getIntent().getStringExtra("number"));
+        //        record_audio();
     }
 
     public void record_audio(){
@@ -114,7 +117,7 @@ public class TakeMessageTextActivity extends Activity implements TextToSpeech.On
 
 
         }else{
-            Toast.makeText(this,"sorry failsed due to some reason",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"sorry failed due to some reason",Toast.LENGTH_SHORT).show();
         }
     }
 
