@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements SeeMessageTimerFr
         viewPager.setAdapter(adapter);
     }
 
-
     public void setTimerByCall(View view) {
         Intent intent= new Intent(MainActivity.this,DisplayContactListActivity.class);
         intent.putExtra("option","Call");
@@ -108,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements SeeMessageTimerFr
         }else{
             requestSMSPermission();
         }
-
     }
 
     public void showContactMessageTimer(){
